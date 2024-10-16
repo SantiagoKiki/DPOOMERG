@@ -1,0 +1,8 @@
+.metadata/*
+bin/*
+tmp/*
+local.properties
+.settings/*
+
+.history/*
+.vscode/*
