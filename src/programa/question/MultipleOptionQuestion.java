@@ -1,15 +1,15 @@
 package programa.question;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.LinkedList;
+
 
 public class MultipleOptionQuestion {
 	private String question;
-	private List<Option> options;
+	private LinkedList<Option> options;
 
-	public MultipleOptionQuestion(String question, List<Option> options) {
+	public MultipleOptionQuestion(String question, LinkedList<Option> options) {
 		this.question = question;
-		this.options = options != null ? options : new ArrayList<>();
+		this.options = options != null ? options : new LinkedList<>();
 	}
 
 	public String getQuestion() {
@@ -20,11 +20,11 @@ public class MultipleOptionQuestion {
 		this.question = question;
 	}
 
-	public List<Option> getOptions() {
+	public LinkedList<Option> getOptions() {
 		return options;
 	}
 
-	public void setOptions(List<Option> options) {
+	public void setOptions(LinkedList<Option> options) {
 		this.options = options;
 	}
 }

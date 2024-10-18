@@ -1,20 +1,20 @@
 package programa;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.LinkedList;
+
 
 import programa.question.MultipleOptionQuestion;
 
 public class QuizActivity extends Activity {
 
 	private double minScore;
-	private List<MultipleOptionQuestion> questions;
+	private LinkedList<MultipleOptionQuestion> questions;
 
 	public QuizActivity(String title, String description, String objective, int expectedDuration, double minScore,
-			List<Activity> prerequisites, List<Activity> followUpActivities, List<MultipleOptionQuestion> questions) {
-		super(title, description, objective, expectedDuration, prerequisites, followUpActivities);
+			LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities, LinkedList<MultipleOptionQuestion> questions) {
+		super();
 		this.minScore = minScore;
-		this.questions = questions != null ? questions : new ArrayList<>();
+		this.questions = questions != null ? questions : new LinkedList<>();
 	}
 
 	public double getMinScore() {
@@ -25,11 +25,11 @@ public class QuizActivity extends Activity {
 		this.minScore = minScore;
 	}
 
-	public List<MultipleOptionQuestion> getQuestions() {
+	public LinkedList<MultipleOptionQuestion> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(List<MultipleOptionQuestion> questions) {
+	public void setQuestions(LinkedList<MultipleOptionQuestion> questions) {
 		this.questions = questions;
 	}
 

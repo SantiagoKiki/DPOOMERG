@@ -1,14 +1,14 @@
 package programa;
 
-import java.util.List;
+import java.util.LinkedList;
 
 public class TaskActivity extends Activity {
 
 	private boolean state;
 
 	public TaskActivity(String title, String description, String objective, int expectedDuration, boolean state,
-			List<Activity> prerequisites, List<Activity> followUpActivities) {
-		super(title, description, objective, expectedDuration, prerequisites, followUpActivities);
+			LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities) {
+		super();
 		this.state = state;
 	}
 

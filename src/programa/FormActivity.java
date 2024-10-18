@@ -1,28 +1,27 @@
 package programa;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
-import programa.question.MultipleOptionQuestion;
+
 import programa.question.OpenQuestion;
 
 public class FormActivity extends Activity {
 	
-	private List<OpenQuestion> questions;
+	private LinkedList<OpenQuestion> questions;
 	private boolean completed;
 
 	public FormActivity(String title, String description, String objective, int expectedDuration,
-			boolean completed, List<Activity> prerequisites, List<Activity> followUpActivities, List<OpenQuestion> questions) {
-		super(title, description, objective, expectedDuration, prerequisites, followUpActivities);
-		this.questions = questions != null ? questions : new ArrayList<>();
+			boolean completed, LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities, LinkedList<OpenQuestion> questions) {
+		super();
+		this.questions = questions != null ? questions : new LinkedList<>();
 		this.completed = completed;
 	}
 
-	public List<OpenQuestion> getQuestions() {
+	public LinkedList<OpenQuestion> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(List<OpenQuestion> questions) {
+	public void setQuestions(LinkedList<OpenQuestion> questions) {
 		this.questions = questions;
 	}
 
