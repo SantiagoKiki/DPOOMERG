@@ -7,9 +7,11 @@ import java.util.LinkedList;
  * The LearningPath class represents a structured learning path with various attributes
  * such as title, description, objectives, difficulty level, duration, rating, professor,
  * creation date, update date, version, and a list of activities.
+ *
+ * @param <Professor> The type representing a professor.
+ * @param <Activity> The type representing an activity.
  */
-public class LearningPath<Professor, Activity>
-{
+public class LearningPath<Professor, Activity> {
     // Attributes of the LearningPath
     private final int id; // Unique identifier of the learning path
     private String title; // Title of the learning path
@@ -28,14 +30,15 @@ public class LearningPath<Professor, Activity>
     /**
      * Constructor to initialize a LearningPath object with the given parameters.
      *
-     * @param title Title of the learning path
-     * @param description Description of the learning path
-     * @param objectives Objectives of the learning path
-     * @param difficultyLevel Difficulty level of the learning path
-     * @param professor Professor associated with the learning path
+     * @param id The unique identifier of the learning path.
+     * @param title Title of the learning path.
+     * @param description Description of the learning path.
+     * @param objectives Objectives of the learning path.
+     * @param difficultyLevel Difficulty level of the learning path.
+     * @param tags Tags associated with the learning path.
+     * @param professor Professor associated with the learning path.
      */
-    public LearningPath(int id, String title, String description, LinkedList<String> objectives, int difficultyLevel, LinkedList<String> tags, Professor professor)
-    {
+    public LearningPath(int id, String title, String description, LinkedList<String> objectives, int difficultyLevel, LinkedList<String> tags, Professor professor) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -55,7 +58,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Gets the title of the learning path.
-     * @return the title of the learning path
+     * @return the title of the learning path.
      */
     public String getTitle() {
         return title;
@@ -63,7 +66,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Sets the title of the learning path.
-     * @param title the new title of the learning path
+     * @param title the new title of the learning path.
      */
     public void setTitle(String title) {
         this.title = title;
@@ -71,7 +74,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Gets the description of the learning path.
-     * @return the description of the learning path
+     * @return the description of the learning path.
      */
     public String getDescription() {
         return description;
@@ -79,7 +82,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Sets the description of the learning path.
-     * @param description the new description of the learning path
+     * @param description the new description of the learning path.
      */
     public void setDescription(String description) {
         this.description = description;
@@ -87,7 +90,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Gets the objectives of the learning path.
-     * @return the objectives of the learning path
+     * @return the objectives of the learning path.
      */
     public LinkedList<String> getObjectives() {
         return objectives;
@@ -95,7 +98,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Sets the objectives of the learning path.
-     * @param objectives the new objectives of the learning path
+     * @param objectives the new objectives of the learning path.
      */
     public void setObjectives(LinkedList<String> objectives) {
         this.objectives = objectives;
@@ -103,7 +106,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Gets the difficulty level of the learning path.
-     * @return the difficulty level of the learning path
+     * @return the difficulty level of the learning path.
      */
     public int getDifficultyLevel() {
         return difficultyLevel;
@@ -111,7 +114,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Sets the difficulty level of the learning path.
-     * @param difficultyLevel the new difficulty level of the learning path
+     * @param difficultyLevel the new difficulty level of the learning path.
      */
     public void setDifficultyLevel(int difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
@@ -119,7 +122,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Gets the duration of the learning path.
-     * @return the duration of the learning path in hours
+     * @return the duration of the learning path in hours.
      */
     public int getDuration() {
         return duration;
@@ -127,7 +130,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Gets the rating of the learning path.
-     * @return the rating of the learning path
+     * @return the rating of the learning path.
      */
     public float getRating() {
         return rating;
@@ -135,7 +138,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Gets the tags associated with the learning path.
-     * @return the tags associated with the learning path
+     * @return the tags associated with the learning path.
      */
     public LinkedList<String> getTags() {
         return tags;
@@ -143,7 +146,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Sets the tags associated with the learning path.
-     * @param tags the new tags associated with the learning path
+     * @param tags the new tags associated with the learning path.
      */
     public void setTags(LinkedList<String> tags) {
         this.tags = tags;
@@ -151,7 +154,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Gets the update date of the learning path.
-     * @return the update date of the learning path
+     * @return the update date of the learning path.
      */
     public Date getModificationDate() {
         return modificationDate;
@@ -159,7 +162,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Sets the update date of the learning path.
-     * @param modificationDate the new update date of the learning path
+     * @param modificationDate the new update date of the learning path.
      */
     public void setModificationDate(Date modificationDate) {
         this.modificationDate = modificationDate;
@@ -167,7 +170,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Gets the version of the learning path.
-     * @return the version of the learning path
+     * @return the version of the learning path.
      */
     public int getVersion() {
         return version;
@@ -175,7 +178,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Sets the version of the learning path.
-     * @param version the new version of the learning path
+     * @param version the new version of the learning path.
      */
     public void setVersion(int version) {
         this.version = version;
@@ -183,7 +186,7 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Gets the list of activities in the learning path.
-     * @return the list of activities
+     * @return the list of activities.
      */
     public LinkedList<Activity> getActivities() {
         return activities;
@@ -191,16 +194,26 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Adds an activity to the learning path.
-     * @param activity the activity to be added
+     * @param activity the activity to be added.
      */
     public void addActivity(Activity activity) {
         activities.add(activity);
     }
 
+    /**
+     * Adds an activity to the learning path at a specific index.
+     * @param activity the activity to be added.
+     * @param index the index at which the activity should be added.
+     */
     public void addActivityByIndex(Activity activity, int index) {
         activities.add(index, activity);
     }
 
+    /**
+     * Moves an activity within the learning path from one index to another.
+     * @param currentIndex the current index of the activity.
+     * @param newIndex the new index of the activity.
+     */
     public void moveActivity(int currentIndex, int newIndex) {
         Activity activity = activities.remove(currentIndex);
         activities.add(newIndex, activity);
@@ -208,18 +221,23 @@ public class LearningPath<Professor, Activity>
 
     /**
      * Removes an activity from the learning path.
-     * @param index the index of the activity to be removed
+     * @param index the index of the activity to be removed.
      */
-    public void removeActivityByIndex(int index)  {
+    public void removeActivityByIndex(int index) {
         activities.remove(index);
     }
 
+    /**
+     * Updates the version of the learning path.
+     */
     public void updateVersion() {
         this.version++;
     }
 
+    /**
+     * Updates the modification date of the learning path to the current date.
+     */
     public void updateModificationDate() {
         this.modificationDate = new Date();
     }
-
 }
