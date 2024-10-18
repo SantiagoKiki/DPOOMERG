@@ -1,12 +1,13 @@
 package controller;
 
 import learningpath.LearningPath;
+import programa.Activity;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class ProfessorController<Activity, User, Student, Professor, ProgressTracker, ActivityTracker> extends Controller {
+public class ProfessorController<User, Student, Professor, ProgressTracker, ActivityTracker> extends Controller {
 
     /**
      * Constructs a new ProfessorController with the specified hash maps and current user.
