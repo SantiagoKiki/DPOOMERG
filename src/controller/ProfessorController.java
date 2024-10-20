@@ -8,6 +8,8 @@ import java.util.LinkedList;
 
 public class ProfessorController<Activity, User, Student, Professor, ProgressTracker, ActivityTracker> extends Controller {
 
+    private Professor professor;
+
     /**
      * Constructs a new ProfessorController with the specified hash maps and current user.
      *
@@ -18,6 +20,7 @@ public class ProfessorController<Activity, User, Student, Professor, ProgressTra
      */
     public ProfessorController(HashMap<String, User> userHashMap, HashMap<Integer, LearningPath> learningPathHashMap, HashMap<Integer, Activity> activityHashMap, User currentUser) {
         super(userHashMap, learningPathHashMap, activityHashMap, currentUser);
+        professor = (Professor) currentUser;
     }
 
     // Professor management methods
