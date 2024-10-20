@@ -1,7 +1,6 @@
 package programa;
 
 import java.util.HashMap;
-
 import utils.Generator;
 
 public abstract class Activity {
