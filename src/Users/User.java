@@ -1,21 +1,19 @@
-package users;
+package Users;
+
+import java.util.HashMap;
 
 public abstract class User {
 	
-	private String username;
+	public String username;
 	private String password;
+	public static UsersVerifier crear;
+
 	
-	
-	
-	
-	
-	public void login() {
-		
-	}
-	
-	public void logout() {
-		
-	}
+	public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        crear.usersDataBase.put(username, password);
+    }
 	
 	
 	public String getUsername() {
