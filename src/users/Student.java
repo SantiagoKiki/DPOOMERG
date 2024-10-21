@@ -1,10 +1,9 @@
-package Users;
+package users;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import learningpath.Activity;
-import Programa.LearningPath;
+import learningpath.activity.Activity;
 
 public class Student extends User {
     private List<String> interests;

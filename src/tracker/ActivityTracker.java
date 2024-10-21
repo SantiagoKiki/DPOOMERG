@@ -1,7 +1,7 @@
 package tracker;
 
 import java.util.Date;
-import programa.Activity;
+import learningpath.activity.Activity;
 
 public class ActivityTracker {
 	

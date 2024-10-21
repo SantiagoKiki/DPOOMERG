@@ -1,10 +1,8 @@
-package Users;
+package users;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import Programa.LearningPath;
 
 public class ProgressTracker {
     private String studentUsername;

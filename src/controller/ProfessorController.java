@@ -1,7 +1,7 @@
 package controller;
 
 import learningpath.LearningPath;
-import programa.Activity;
+import learningpath.activity.Activity;
 
 import java.util.Collection;
 import java.util.HashMap;

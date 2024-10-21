@@ -1,6 +1,4 @@
-package Users;
-
-import java.util.HashMap;
+package users;
 
 public abstract class User {
 	

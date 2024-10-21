@@ -1,10 +1,9 @@
-package Users;
+package users;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import Programa.Activity;
-import Programa.LearningPath;
 
 class Teacher extends User {
     private HashMap<String, LearningPath> createdLearningPaths;
