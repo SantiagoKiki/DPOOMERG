@@ -3,7 +3,7 @@ package usuarios;
 import java.util.Date;
 import java.util.List;
 
-public class ProgressTracker<LearningPath, ActivityTracker>{
+public class ProgressTracker<LearningPath>{
 	
 	private String studentUsername;
 	private LearningPath learningpath;
