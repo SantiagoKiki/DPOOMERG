@@ -1,8 +1,9 @@
 package tracker;
 
 import java.util.Date;
+import programa.Activity;
 
-public class ActivityTracker<Activity> {
+public class ActivityTracker {
 	
 	
 	private Activity activity;
