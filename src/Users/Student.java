@@ -3,7 +3,7 @@ package Users;
 import java.util.ArrayList;
 import java.util.List;
 
-import Programa.Activity;
+import learningpath.Activity;
 import Programa.LearningPath;
 
 public class Student extends User {

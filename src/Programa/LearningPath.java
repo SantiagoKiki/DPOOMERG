@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import Users.Student;
+import learningpath.Activity;
 
 public class LearningPath {
     private String title;
