@@ -17,7 +17,7 @@ public abstract class Activity {
 
     public Activity(String title, String description, String objective, int expectedDuration,
                     LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities) {
-        Generator u = new Generator();
+        Generator u = Generator.getInstance();
         this.id = u.generateId("Activity");
         this.title = title;
         this.description = description;
@@ -25,6 +25,7 @@ public abstract class Activity {
         this.expectedDuration = expectedDuration;
         this.prerequisites = prerequisites;
         this.followUpActivities = followUpActivities;
+        Generator.deleteInstance();
     }
 
     public String getId() {

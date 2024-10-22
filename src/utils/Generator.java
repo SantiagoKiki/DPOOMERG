@@ -6,11 +6,23 @@ import java.util.Random;
 
 public class Generator {
 
+	private static Generator instance = null;
 	private final HashMap<String, LinkedList<String>> db = new HashMap<>();
 
-	public Generator() {
+	private Generator() {
 		db.put("Activity", new LinkedList<>());
 		db.put("LearningPath", new LinkedList<>());
+	}
+	
+	public static Generator getInstance() {
+		if (instance == null) {
+			instance = new Generator();
+		}
+		return instance;
+	}
+	
+	public static void deleteInstance() {
+		instance = null;
 	}
 
 	private String nanoid(String input) {
@@ -76,14 +88,14 @@ public class Generator {
 	}
 
 	public String generateId(String type) {
-        int l = type.length() + (int) Math.floor(type.length() / 2.0);
-        String id = interleave(type, nanoid(Integer.toString(l)));
-        String finalId = checkId(type, id);
+		int l = type.length() + (int) Math.floor(type.length() / 2.0);
+		String id = interleave(type, nanoid(Integer.toString(l)));
+		String finalId = checkId(type, id);
 
-        if (!existsInDatabase(type, finalId)) {
-            db.get(type).add(finalId);
-        }
+		if (!existsInDatabase(type, finalId)) {
+			db.get(type).add(finalId);
+		}
 
-        return finalId;
-    }
+		return finalId;
+	}
 }
