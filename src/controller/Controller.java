@@ -1,12 +1,12 @@
 package controller;
 
-import learningpath.LearningPath;
+import learningpath.*;
+import learningpath.activity.Activity;
+import users.*;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 
-public class Controller<Activity, User, Student, Professor, ProgressTracker, ActivityTracker> {
+public class Controller {
 
     protected HashMap<String, User> userHashMap;
     protected HashMap<Integer, LearningPath> learningPathHashMap;

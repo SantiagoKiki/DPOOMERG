@@ -1,31 +1,39 @@
 package users;
 
+import consola.UsersVerifier;
+
 public abstract class User {
 	
-	public String username;
-	private String password;
-	public static UsersVerifier crear;
-
+	protected String username;
+	protected String password;
 	
 	public User(String username, String password) {
         this.username = username;
         this.password = password;
-        crear.usersDataBase.put(username, password);
     }
-	
-	
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getPassword() {
-		return password;
-	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	abstract public String getRole();
+
+	public boolean authenticate(String password) {
+		if (this.password.equals(password)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	
 	
 

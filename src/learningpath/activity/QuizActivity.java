@@ -2,19 +2,19 @@ package learningpath.activity;
 
 import java.util.LinkedList;
 
-
-import programa.question.MultipleOptionQuestion;
+import learningpath.question.MultipleOptionQuestion;
 
 public class QuizActivity extends Activity {
 
 	private double minScore;
 	private LinkedList<MultipleOptionQuestion> questions;
 
-	public QuizActivity(String title, String description, String objective, int expectedDuration, double minScore,
-			LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities, LinkedList<MultipleOptionQuestion> questions) {
-		super();
-		this.minScore = minScore;
+	public QuizActivity(String title, String description, String objective, int expectedDuration,
+						LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities,
+						LinkedList<MultipleOptionQuestion> questions, double minScore) {
+		super(title, description, objective, expectedDuration, prerequisites, followUpActivities);
 		this.questions = questions != null ? questions : new LinkedList<>();
+		this.minScore = minScore;
 	}
 
 	public double getMinScore() {

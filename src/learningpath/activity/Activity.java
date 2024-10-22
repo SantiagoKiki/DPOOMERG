@@ -1,6 +1,8 @@
 package learningpath.activity;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+
 import utils.Generator;
 
 public abstract class Activity {
@@ -10,19 +12,19 @@ public abstract class Activity {
     protected String description;
     protected String objective;
     protected int expectedDuration;
-    protected HashMap<String, Activity> prerequisites;
-    protected HashMap<String, Activity> followUpActivities;
+    protected LinkedList<Activity> prerequisites;
+    protected LinkedList<Activity> followUpActivities;
 
-    protected Activity() {
+    public Activity(String title, String description, String objective, int expectedDuration,
+                    LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities) {
         Generator u = new Generator();
         this.id = u.generateId("Activity");
-        this.title = "";
-        this.description = "";
-        this.objective = "";
-        this.expectedDuration = 0;
-        this.prerequisites = new HashMap<>();
-        this.followUpActivities = new HashMap<>();
-        u = null;
+        this.title = title;
+        this.description = description;
+        this.objective = objective;
+        this.expectedDuration = expectedDuration;
+        this.prerequisites = prerequisites;
+        this.followUpActivities = followUpActivities;
     }
 
     public String getId() {
@@ -45,11 +47,11 @@ public abstract class Activity {
         return this.expectedDuration;
     }
 
-    public HashMap<String, Activity> getPrerequisites() {
+    public LinkedList<Activity> getPrerequisites() {
         return this.prerequisites;
     }
 
-    public HashMap<String, Activity> getFollowUpActivities() {
+    public LinkedList<Activity> getFollowUpActivities() {
         return this.followUpActivities;
     }
 
@@ -73,72 +75,28 @@ public abstract class Activity {
         this.expectedDuration = i;
     }
 
-    public void setPrerequisites(HashMap<String, Activity> p) {
+    public void setPrerequisites(LinkedList<Activity> p) {
         this.prerequisites = p;
     }
 
-    public void setFollowUpActivities(HashMap<String, Activity> f) {
+    public void setFollowUpActivities(LinkedList<Activity> f) {
         this.followUpActivities = f;
     }
 
-    public boolean addPrerequisite(Activity activity) {
-        if (activity == null) {
-            System.err.println("The activity can not be null");
-            return false;
-        }
-        if (this.prerequisites.containsKey(activity.getId())) {
-            System.err.println("The activity is already present in the registry");
-            return false;
-        }
-
-        this.prerequisites.put(activity.getId(), activity);
-        return true;
+    public void addPrerequisite(Activity activity) {
+        this.prerequisites.add(activity);
     }
 
-    public boolean removePrerequisite(String activityId) {
-        if (activityId == null) {
-            System.err.println("The id can not be null");
-            return false;
-        }
-
-        if (!this.prerequisites.containsKey(activityId)) {
-            System.err.println("The id was not found in the registry");
-            return false;
-        }
-
-        this.prerequisites.remove(activityId);
-        return true;
+    public void removePrerequisite(int index) {
+        this.prerequisites.remove(index);
     }
 
-    public boolean addFollowUp(Activity activity) {
-        if (activity == null) {
-            System.err.println("The activity can not be null");
-            return false;
-        }
-
-        if (this.followUpActivities.containsKey(activity.getId())) {
-            System.err.println("The activity is already present in the registry");
-            return false;
-        }
-
-        this.followUpActivities.put(activity.getId(), activity);
-        return true;
+    public void addFollowUp(Activity activity) {
+        this.followUpActivities.add(activity);
     }
 
-    public boolean removeFollowUp(String activityId) {
-
-        if (activityId == null) {
-            System.err.println("The id can not be null");
-            return false;
-        }
-
-        if (!this.followUpActivities.containsKey(activityId)) {
-            System.err.println("The id was not found in the registry");
-            return false;
-        }
-
-        this.followUpActivities.remove(activityId);
-        return true;
+    public void removeFollowUp(int index) {
+        this.followUpActivities.remove(index);
     }
 
 }

@@ -1,25 +1,26 @@
 package tracker;
 
-import java.util.Date;
-import java.util.List;
+import learningpath.LearningPath;
 
-public class ProgressTracker<LearningPath>{
+import java.util.Date;
+import java.util.LinkedList;
+
+public class ProgressTracker{
 	
 	private String studentUsername;
 	private LearningPath learningpath;
-	private List<ActivityTracker> activitiestracker;
+	private LinkedList<ActivityTracker> activityTrackers;
 	protected Date startDate;
 	protected Date completionDate;
 	
 	
-	public ProgressTracker(String studentUsername, LearningPath learningpath, List<ActivityTracker> activitiestracker,
-			Date startDate, Date completionDate) {
+	public ProgressTracker(String studentUsername, LearningPath learningpath) {
 		
 		this.studentUsername = studentUsername;
 		this.learningpath = learningpath;
-		this.activitiestracker = activitiestracker;
-		this.startDate = startDate;
-		this.completionDate = completionDate;
+		this.activityTrackers = new LinkedList<ActivityTracker>();
+		this.startDate = new Date();
+		this.completionDate = null;
 	}
 
 
@@ -43,15 +44,22 @@ public class ProgressTracker<LearningPath>{
 	}
 
 
-	public List<ActivityTracker> getActivitiestracker() {
-		return activitiestracker;
+	public LinkedList<ActivityTracker> getActivitiestracker() {
+		return activityTrackers;
+	}
+
+	public ActivityTracker getActivityTrackerByIndex(int index) {
+		return activityTrackers.get(index);
 	}
 
 
-	public void setActivitiestracker(List<ActivityTracker> activitiestracker) {
-		this.activitiestracker = activitiestracker;
+	public void setActivitiestracker(LinkedList<ActivityTracker> activitiestracker) {
+		this.activityTrackers = activitiestracker;
 	}
 
+	public LinkedList<ActivityTracker> getActivityTrackers() {
+		return activityTrackers;
+	}
 
 	public Date getStartDate() {
 		return startDate;
@@ -74,15 +82,15 @@ public class ProgressTracker<LearningPath>{
 	
 	public float calculateProgress() {
 		int cont = 0;
-		if (this.activitiestracker.isEmpty()) {
+		if (this.activityTrackers.isEmpty()) {
 			return 0.0f;
 		}
-		for (ActivityTracker activitytracker: this.activitiestracker) {
+		for (ActivityTracker activitytracker: this.activityTrackers) {
 			if (activitytracker.getStatus().equals("Completed")) {
 				cont++;
 			}
 		}
-		return ((float) cont/this.activitiestracker.size()) * 100;
+		return ((float) cont/this.activityTrackers.size()) * 100;
 	}
 	
 	// No se muy bien como implementar el metodo con respecto al uml

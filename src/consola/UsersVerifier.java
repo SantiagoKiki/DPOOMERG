@@ -1,4 +1,4 @@
-package users;
+package consola;
 
 
 import java.util.HashMap;
@@ -7,9 +7,8 @@ import java.util.Scanner;
 public class UsersVerifier {
     public static HashMap<String, String> usersDataBase = new HashMap<>();
     public static String currentUser = null;
-    
-    
-    
+
+
     public static boolean verifyLogin(String username, String password) {
         return usersDataBase.containsKey(username) && usersDataBase.get(username).equals(password);
     }
@@ -81,8 +80,5 @@ public class UsersVerifier {
 	public static void setCurrentUser(String currentUser) {
 		UsersVerifier.currentUser = currentUser;
 	}
-
-    
-	
     
 }

@@ -1,11 +1,15 @@
 package controller;
 
-import learningpath.LearningPath;
+import learningpath.*;
+import learningpath.activity.*;
+import tracker.ActivityTracker;
+import tracker.ProgressTracker;
+import users.*;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class StudentController<User, Student, ProgressTracker, ActivityTracker> extends Controller {
+public class StudentController extends Controller {
 
     Student student;
 
@@ -18,14 +22,24 @@ public class StudentController<User, Student, ProgressTracker, ActivityTracker> 
 
     /**
      * Enrolls a student in a learning path.
-     *
-     * @param student The student to be enrolled.
      * @param learningPath The learning path in which the student is to be enrolled.
      */
-    public void enrollInLearningPath(Student student, LearningPath learningPath) {
-        ProgressTracker progressTracker = new ProgressTracker(learningPath);
-        student.addProgressTracker(progressTracker);
-        LearningPath.addProgressTracker(progressTracker);
+    public void enrollInLearningPath(LearningPath learningPath) {
+        student.enrollInLearningPath(learningPath);
+    }
+
+    public LinkedList<LearningPath> getLearningPathsByInterest(String interest) {
+
+        LinkedList<LearningPath> learningPaths = new LinkedList<>();
+
+        for(LearningPath learningPath : learningPathHashMap.values()) {
+
+            LinkedList tags = learningPath.getTags();
+            if(tags.contains(interest)) {
+                learningPaths.add(learningPath);
+            }
+        }
+        return learningPaths;
     }
 
     // Progress tracker management methods
@@ -43,11 +57,10 @@ public class StudentController<User, Student, ProgressTracker, ActivityTracker> 
     /**
      * Retrieves a progress tracker by its index from a student's progress trackers.
      *
-     * @param student The student whose progress tracker is to be retrieved.
      * @return A linked list of progress trackers associated with the student.
      */
-    public LinkedList<ProgressTracker> getStudentProgressTrackerByIndex(Student student) {
-        return student.getProgressTrackerByIndex();
+    public ProgressTracker getStudentProgressTrackerByIndex(int index) {
+        return student.getProgressTrackerByIndex(index);
     }
 
     /**
@@ -56,7 +69,7 @@ public class StudentController<User, Student, ProgressTracker, ActivityTracker> 
      * @param progressTracker The progress tracker whose activity trackers are to be retrieved.
      * @return A linked list of activity trackers associated with the progress tracker.
      */
-    public void getActivityTrackers(ProgressTracker progressTracker) {
+    public LinkedList<ActivityTracker> getActivityTrackers(ProgressTracker progressTracker) {
         return progressTracker.getActivityTrackers();
     }
 
@@ -67,7 +80,7 @@ public class StudentController<User, Student, ProgressTracker, ActivityTracker> 
      * @param index The index of the activity tracker.
      * @return The activity tracker at the specified index.
      */
-    public void getActivityTrackerByIndex(ProgressTracker progressTracker, int index) {
+    public ActivityTracker getActivityTrackerByIndex(ProgressTracker progressTracker, int index) {
         return progressTracker.getActivityTrackerByIndex(index);
     }
 
@@ -79,7 +92,7 @@ public class StudentController<User, Student, ProgressTracker, ActivityTracker> 
      * @param activityTracker The activity tracker whose activity is to be retrieved.
      * @return The activity associated with the activity tracker.
      */
-    public void getActivity(ActivityTracker activityTracker) {
+    public Activity getActivity(ActivityTracker activityTracker) {
         return activityTracker.getActivity();
     }
 
@@ -89,7 +102,7 @@ public class StudentController<User, Student, ProgressTracker, ActivityTracker> 
      * @param activityTracker The activity tracker whose status is to be retrieved.
      * @return The status of the activity tracker.
      */
-    public void getActivityStatus(ActivityTracker activityTracker) {
+    public String getActivityStatus(ActivityTracker activityTracker) {
         return activityTracker.getStatus();
     }
 

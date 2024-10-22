@@ -1,7 +1,6 @@
-package programa.question;
+package learningpath.question;
 
 import java.util.LinkedList;
-
 
 public class MultipleOptionQuestion {
 	private String question;

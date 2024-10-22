@@ -2,19 +2,15 @@ package learningpath.activity;
 
 import java.util.LinkedList;
 
-
-import programa.question.OpenQuestion;
+import learningpath.question.OpenQuestion;
 
 public class FormActivity extends Activity {
 	
 	private LinkedList<OpenQuestion> questions;
-	private boolean completed;
 
-	public FormActivity(String title, String description, String objective, int expectedDuration,
-			boolean completed, LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities, LinkedList<OpenQuestion> questions) {
-		super();
+	public FormActivity(String title, String description, String objective, int expectedDuration, LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities, LinkedList<OpenQuestion> questions) {
+		super(title, description, objective, expectedDuration, prerequisites, followUpActivities);
 		this.questions = questions != null ? questions : new LinkedList<>();
-		this.completed = completed;
 	}
 
 	public LinkedList<OpenQuestion> getQuestions() {
@@ -23,14 +19,6 @@ public class FormActivity extends Activity {
 
 	public void setQuestions(LinkedList<OpenQuestion> questions) {
 		this.questions = questions;
-	}
-
-	public boolean isCompleted() {
-		return completed;
-	}
-
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
 	}
 	
 	public boolean addQuestion(OpenQuestion question) {

@@ -1,18 +1,49 @@
 package users;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
+import learningpath.LearningPath;
 import learningpath.activity.Activity;
+import tracker.ActivityTracker;
+import tracker.ProgressTracker;
 
 public class Student extends User {
-    private List<String> interests;
-    private List<ProgressTracker> progressTrackers;
+    private LinkedList<String> interests;
+    private LinkedList<ProgressTracker> progressTrackers;
+    public final static String ROLE = "student";
     
     public Student(String username, String password) {
         super(username, password);
-        this.interests = new ArrayList<>();
-        this.progressTrackers = new ArrayList<>();
+        this.interests = new LinkedList<>();
+        this.progressTrackers = new LinkedList<>();
+    }
+
+    public LinkedList<String> getInterests() {
+        return interests;
+    }
+
+    public LinkedList<ProgressTracker> getProgressTrackers() {
+        return progressTrackers;
+    }
+
+    public ProgressTracker getProgressTrackerByIndex(int index) {
+        return progressTrackers.get(index);
+    }
+
+    public List<ActivityTracker> getActivityTrackers(ProgressTracker progressTracker) {
+        return progressTracker.getActivityTrackers();
+    }
+
+    public ActivityTracker getActivityTrackerByIndex(ProgressTracker progressTracker, int index) {
+        return progressTracker.getActivityTrackerByIndex(index);
+    }
+
+    @Override
+    public String getRole() {
+        return ROLE;
     }
     
     public void addInterest(String interest) {
@@ -25,28 +56,9 @@ public class Student extends User {
         }
     }
     
-    public List<LearningPath> getLearningPathsByInterest(String interest) {
-    	List<LearningPath> arregloReturn = new ArrayList();
-    	int num=0; //recorrido :) 1 vez nada mas
-    	if(num == 0) {
-	    	for(ProgressTracker elemenents : progressTrackers) {
-	    		ArrayList<LearningPath> path = elemenents.getAllLearninPaths();
-		    	for(LearningPath allPaths : path) {
-		    		ArrayList<String> interesesPath = allPaths.interest;
-		    		for(String elementosInterest: interesesPath) {
-			    		if (elementosInterest.equals(interest) || elementosInterest.contentEquals(interest)) {
-			    			arregloReturn.add(allPaths);
-			    			}	
-		    			}
-		    		}
-	    		}
-	    num++;
-    	}
-    	return arregloReturn;
-    }
-    
-    public void registerLearningPath(LearningPath path) {
-        progressTrackers.add(new ProgressTracker(this.username, path));
+    public void enrollInLearningPath(LearningPath learningPath) {
+        ProgressTracker progressTracker = new ProgressTracker(this.username, learningPath);
+        progressTrackers.add(progressTracker);
     }
     
     public void completeActivity(Activity activity) {
