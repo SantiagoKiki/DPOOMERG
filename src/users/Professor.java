@@ -104,4 +104,5 @@ public class Professor extends User {
     public void removeActivityFromLearningPath(LearningPath learningPath, int pos) {
         learningPath.removeActivityByIndex(pos);
     }
+
 }
