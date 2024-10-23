@@ -1,7 +1,7 @@
 package learningpath.question;
 
 public class Option {
-	
+
 	private String text;
 	private boolean correct;
 	private String explanation;
