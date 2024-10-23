@@ -33,7 +33,10 @@ public class QuizActivity extends Activity {
 	}
 
 	public boolean addQuestion(MultipleOptionQuestion question) {
-		if (this.questions.contains(question)) {
+		if (question == null) {
+			System.err.println("Question can not be null.");
+		}
+		if (this.containsQuestion(question)) {
 			System.out.println("Question already added.");
 			return false;
 		}
@@ -42,7 +45,7 @@ public class QuizActivity extends Activity {
 	}
 	
 	public boolean removeQuestion(MultipleOptionQuestion question) {
-		if (this.questions.contains(question)) {
+		if (question != null && this.containsQuestion(question)) {
 			this.questions.remove(question);
 			return true;
 		}

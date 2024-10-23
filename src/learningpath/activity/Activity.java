@@ -1,8 +1,6 @@
 package learningpath.activity;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-
 import tracker.ActivityTracker;
 import utils.Generator;
 
@@ -19,7 +17,7 @@ public abstract class Activity {
     protected LinkedList<Activity> followUpActivities;
 
     public Activity(String title, String description, String objective, int expectedDuration, boolean mandatory) {
-        Generator u = new Generator();
+        Generator u = Generator.getInstance();
         this.id = u.generateId("Activity");
         this.title = title;
         this.description = description;
