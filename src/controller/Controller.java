@@ -9,8 +9,8 @@ import java.util.HashMap;
 public class Controller {
 
     protected HashMap<String, User> userHashMap;
-    protected HashMap<Integer, LearningPath> learningPathHashMap;
-    protected HashMap<Integer, Activity> activityHashMap;
+    protected HashMap<String, LearningPath> learningPathHashMap;
+    protected HashMap<String, Activity> activityHashMap;
     protected User currentUser;
 
     /**
@@ -31,7 +31,7 @@ public class Controller {
      * @param activityHashMap A hash map of activities.
      * @param currentUser The current user.
      */
-    public Controller(HashMap<String, User> userHashMap, HashMap<Integer, LearningPath> learningPathHashMap, HashMap<Integer, Activity> activityHashMap, User currentUser) {
+    public Controller(HashMap<String, User> userHashMap, HashMap<String, LearningPath> learningPathHashMap, HashMap<String, Activity> activityHashMap, User currentUser) {
         this.userHashMap = userHashMap;
         this.learningPathHashMap = learningPathHashMap;
         this.activityHashMap = activityHashMap;

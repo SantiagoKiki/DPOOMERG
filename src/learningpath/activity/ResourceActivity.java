@@ -6,9 +6,8 @@ public class ResourceActivity extends Activity {
 	
 	private String url;
 
-	public ResourceActivity(String title, String description, String objective, int expectedDuration,
-			LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities, String url) {
-		super(title, description, objective, expectedDuration, prerequisites, followUpActivities);
+	public ResourceActivity(String title, String description, String objective, int expectedDuration, boolean mandatory, String url) {
+		super(title, description, objective, expectedDuration, mandatory);
 		this.url = url;
 	}
 

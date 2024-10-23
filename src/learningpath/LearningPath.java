@@ -1,6 +1,7 @@
 package learningpath;
 
 import learningpath.activity.Activity;
+import tracker.ProgressTracker;
 import users.Professor;
 
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.LinkedList;
  */
 public class LearningPath {
     // Attributes of the LearningPath
-    private final int id; // Unique identifier of the learning path
+    private final String id; // Unique identifier of the learning path
     private String title; // Title of the learning path
     private String description; // Description of the learning path
     private LinkedList<String> objectives; // Objectives of the learning path
@@ -26,6 +27,7 @@ public class LearningPath {
     private Date modificationDate; // Date when the learning path was last updated
     private int version; // Version of the learning path
     private LinkedList<Activity> activities; // List of activities in the learning path
+    private LinkedList<ProgressTracker> progressTrackers; // List of progress trackers for students enrolled in the learning path
 
     /**
      * Constructor to initialize a LearningPath object with the given parameters.
@@ -38,7 +40,7 @@ public class LearningPath {
      * @param tags            Tags associated with the learning path.
      * @param professor       Professor associated with the learning path.
      */
-    public LearningPath(int id, String title, String description, LinkedList<String> objectives, int difficultyLevel, LinkedList<String> tags, Professor professor) {
+    public LearningPath(String id, String title, String description, LinkedList<String> objectives, int difficultyLevel, LinkedList<String> tags, Professor professor) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -52,11 +54,12 @@ public class LearningPath {
         this.modificationDate = new Date(); // Set update date to current date
         this.version = 1; // Initial version is set to 1
         this.activities = new LinkedList<Activity>(); // Initialize the list of activities
+        this.progressTrackers = new LinkedList<ProgressTracker>(); // Initialize the list of progress trackers
     }
 
     // Getter and setter methods for each attribute
 
-    public Integer getId() {
+    public String getId() {
         return this.id;
     }
     /**
@@ -203,6 +206,8 @@ public class LearningPath {
         this.version = version;
     }
 
+    // Activity management methods
+
     /**
      * Gets the list of activities in the learning path.
      *
@@ -210,6 +215,14 @@ public class LearningPath {
      */
     public LinkedList<Activity> getActivities() {
         return activities;
+    }
+
+    public Activity getActivityByIndex(int index){
+        return activities.get(index);
+    }
+
+    public Professor getProfessor() {
+        return professor;
     }
 
     /**
@@ -227,7 +240,7 @@ public class LearningPath {
      * @param activity the activity to be added.
      * @param index    the index at which the activity should be added.
      */
-    public void addActivityByIndex(Activity activity, int index) {
+    public void addActivityInPos(Activity activity, int index) {
         activities.add(index, activity);
     }
 
@@ -249,6 +262,25 @@ public class LearningPath {
      */
     public void removeActivityByIndex(int index) {
         activities.remove(index);
+    }
+
+    // Progress tracker management methods
+
+    /**
+     * Gets the list of progress trackers associated with the learning path.
+     *
+     * @return the list of progress trackers.
+     */
+    public LinkedList<ProgressTracker> getProgressTrackers() {
+        return progressTrackers;
+    }
+
+    public ProgressTracker getProgressTrackerByIndex(int index){
+        return progressTrackers.get(index);
+    }
+
+    public void addProgressTracker(ProgressTracker progressTracker){
+        progressTrackers.add(progressTracker);
     }
 
     /**

@@ -9,11 +9,10 @@ public class ExamActivity extends Activity {
 
 	private LinkedList<OpenQuestion> questions;
 
-	public ExamActivity(String title, String description, String objective, int expectedDuration,
-						LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities,
+	public ExamActivity(String title, String description, String objective, int expectedDuration, boolean mandatory,
 						LinkedList<OpenQuestion> questions) {
 
-		super(title, description, objective, expectedDuration, prerequisites, followUpActivities);
+		super(title, description, objective, expectedDuration, mandatory);
 		this.questions = questions != null ? questions : new LinkedList<>();
 	}
 

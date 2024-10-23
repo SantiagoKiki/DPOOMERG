@@ -1,14 +1,12 @@
 package users;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-
 import learningpath.LearningPath;
 import learningpath.activity.Activity;
 import tracker.ActivityTracker;
 import tracker.ProgressTracker;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class Student extends User {
     private LinkedList<String> interests;
@@ -59,6 +57,7 @@ public class Student extends User {
     public void enrollInLearningPath(LearningPath learningPath) {
         ProgressTracker progressTracker = new ProgressTracker(this.username, learningPath);
         progressTrackers.add(progressTracker);
+        learningPath.addProgressTracker(progressTracker);
     }
     
     public void completeActivity(Activity activity) {
@@ -66,7 +65,7 @@ public class Student extends User {
     }
     
     public float getProgress(ProgressTracker tracker) {
-        return tracker.calculateProgress();
+        return tracker.getProgress();
     }
 }
 	
