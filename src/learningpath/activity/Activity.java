@@ -91,8 +91,8 @@ public abstract class Activity {
         this.mandatory = m;
     }
 
-    public void addActivityTracker(ActivityTracker at) {
-        this.activityTrackers.add(at);
+    public void addActivityTracker(ActivityTracker activityTracker) {
+        this.activityTrackers.add(activityTracker);
     }
 
     public void removeActivityTrackerByIndex(int index) {

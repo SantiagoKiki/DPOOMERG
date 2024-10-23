@@ -19,6 +19,7 @@ public class ActivityTracker {
 		this.completionStatus = "Not started";
 		this.startDate = null;
 		this.completionDate = null;
+		activity.addActivityTracker(this);
 	}
 	
 	
