@@ -9,6 +9,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+Project_1_DPOO.iml
 
 # External tool builders
 .externalToolBuilders/
@@ -58,8 +59,6 @@ local.properties
 # Uncomment this line if you wish to ignore the project description file.
 # Typically, this file would be tracked if it contains build/dependency configurations:
 #.project
-
-.idea/*
 
 # User-specific stuff
 .idea/**/workspace.xml
@@ -148,3 +147,4 @@ fabric.properties
 
 # Built Visual Studio Code Extensions
 *.vsix
+.idea/
