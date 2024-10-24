@@ -1,7 +1,13 @@
 package learningpath.question;
 
-public class OpenQuestion {
+import java.io.Serializable;
 
+public class OpenQuestion implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String text;
 
 	public OpenQuestion(String text) {

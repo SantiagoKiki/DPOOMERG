@@ -1,16 +1,34 @@
 package utils;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class Generator {
+import persistencia.CentralPersistencia;
+
+public class Generator implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private static Generator instance = null;
+    public transient static CentralPersistencia centralPersistencia = new CentralPersistencia();
 
 	private final HashMap<String, LinkedList<String>> db = new HashMap<>();
 
-	public Generator() {
+	private Generator() {
 		db.put("Activity", new LinkedList<>());
 		db.put("LearningPath", new LinkedList<>());
+	}
+	
+	public static Generator getInstance() {
+		if (instance == null) {
+			instance = new Generator();
+		}
+		return instance;
 	}
 
 	private String nanoid(String input) {
@@ -86,4 +104,11 @@ public class Generator {
 
         return finalId;
     }
+	
+public void guardarInfo() {
+    	
+    	centralPersistencia.guardar(db);
+
+    }
+
 }

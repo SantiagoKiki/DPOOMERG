@@ -1,14 +1,17 @@
 package learningpath.activity;
 
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.LinkedList;
-
 import tracker.ActivityTracker;
 import utils.Generator;
 
-public abstract class Activity {
+public abstract class Activity implements Serializable{
 
-    protected String id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected String id;
     protected String title;
     protected String description;
     protected String objective;
@@ -19,7 +22,7 @@ public abstract class Activity {
     protected LinkedList<Activity> followUpActivities;
 
     public Activity(String title, String description, String objective, int expectedDuration, boolean mandatory) {
-        Generator u = new Generator();
+        Generator u = Generator.getInstance();
         this.id = u.generateId("Activity");
         this.title = title;
         this.description = description;

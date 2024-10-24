@@ -1,15 +1,23 @@
 package users;
 
+import java.io.Serializable;
+import java.util.LinkedList;
 import learningpath.*;
 import learningpath.activity.*;
 import learningpath.question.*;
+import persistencia.CentralPersistencia;
 
-import java.util.LinkedList;
-
-public class Professor extends User {
-    private final LinkedList<LearningPath> createdLearningPaths;
+public class Professor extends User implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public final LinkedList<LearningPath> createdLearningPaths;
     private final LinkedList<Activity> createdActivities;
     private final static String ROLE = "professor";
+    public transient static CentralPersistencia centralPersistencia = new CentralPersistencia();
+
+    
     
     public Professor(String username, String password) {
         super(username, password);
@@ -138,9 +146,9 @@ public class Professor extends User {
     
     public Activity createExamActivity(String title, String description, String objective,
                                        int expectedDuration, boolean mandatory,
-                                       LinkedList<OpenQuestion> question) {
+                                       LinkedList<OpenQuestion> oquestion, LinkedList<MultipleOptionQuestion> moquestion) {
 
-        Activity activity = new ExamActivity(title, description, objective, expectedDuration, mandatory, question);
+        Activity activity = new ExamActivity(title, description, objective, expectedDuration, mandatory, oquestion, moquestion);
         createdActivities.add(activity);
         return activity;
     }
@@ -163,9 +171,9 @@ public class Professor extends User {
     }
 
     public Activity createTaskActivity(String title, String description, String objective,
-                                       int expectedDuration, boolean mandatory) {
+                                       int expectedDuration, boolean mandatory, String toDo) {
 
-        Activity activity = new TaskActivity(title, description, objective, expectedDuration, mandatory);
+        Activity activity = new TaskActivity(title, description, objective, expectedDuration, mandatory, toDo);
         createdActivities.add(activity);
         return activity;
     }
@@ -213,4 +221,11 @@ public class Professor extends User {
         activity.removeFollowUp(index);
     }
 
+    public void guardarInfo() {
+    	
+    	centralPersistencia.guardar(createdLearningPaths);
+    	centralPersistencia.guardar(createdActivities);
+
+    }
+    
 }

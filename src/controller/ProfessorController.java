@@ -1,15 +1,13 @@
 package controller;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
 import learningpath.LearningPath;
 import learningpath.activity.*;
 import learningpath.question.*;
 import users.Professor;
 import users.User;
-
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
 
 public class ProfessorController extends Controller {
 
@@ -18,7 +16,8 @@ public class ProfessorController extends Controller {
     private Activity currentActivity;
 
     /**
-     * Constructs a new ProfessorController with the specified hash maps and current user.
+     * Constructs a new ProfessorController with the specified hash maps and
+     * current user.
      *
      * @param userHashMap A hash map of users.
      * @param learningPathHashMap A hash map of learning paths.
@@ -33,7 +32,6 @@ public class ProfessorController extends Controller {
     }
 
     // Query methods
-
     /**
      * Retrieves the learning paths associated with a professor.
      *
@@ -64,7 +62,7 @@ public class ProfessorController extends Controller {
         return learningPathHashMap.values();
     }
 
-    public LearningPath getLearningPathById(String id){
+    public LearningPath getLearningPathById(String id) {
         currentLearningPath = learningPathHashMap.get(id);
         return currentLearningPath;
     }
@@ -97,13 +95,12 @@ public class ProfessorController extends Controller {
         return activityHashMap.values();
     }
 
-    public Activity getActivityById(String id){
+    public Activity getActivityById(String id) {
         currentActivity = activityHashMap.get(id);
         return currentActivity;
     }
 
     // Learning path management methods
-
     /**
      * Creates a new learning path and adds it to the hash map.
      *
@@ -157,13 +154,12 @@ public class ProfessorController extends Controller {
     }
 
     // Activity management methods
-
-    public void createExamActivity(String title, String description, String objective, int expectedDuration, boolean mandatory,LinkedList<OpenQuestion> questions) {
-        Activity newActivity = professor.createExamActivity(title, description, objective, expectedDuration, mandatory,questions);
+    public void createExamActivity(String title, String description, String objective, int expectedDuration, boolean mandatory, LinkedList<OpenQuestion> oquestions, LinkedList<MultipleOptionQuestion> moquestions) {
+        Activity newActivity = professor.createExamActivity(title, description, objective, expectedDuration, mandatory, oquestions, moquestions);
         activityHashMap.put(newActivity.getId(), newActivity);
     }
 
-    public void createFormActivity(String title, String description, String objective, int expectedDuration, boolean mandatory,LinkedList<OpenQuestion> questions) {
+    public void createFormActivity(String title, String description, String objective, int expectedDuration, boolean mandatory, LinkedList<OpenQuestion> questions) {
         Activity newActivity = professor.createFormActivity(title, description, objective, expectedDuration, mandatory, questions);
         activityHashMap.put(newActivity.getId(), newActivity);
     }
@@ -178,8 +174,8 @@ public class ProfessorController extends Controller {
         activityHashMap.put(newActivity.getId(), newActivity);
     }
 
-    public void createTaskActivity(String title, String description, String objective, int expectedDuration, boolean mandatory) {
-        Activity newActivity = professor.createTaskActivity(title, description, objective, expectedDuration, mandatory);
+    public void createTaskActivity(String title, String description, String objective, int expectedDuration, boolean mandatory, String toDo) {
+        Activity newActivity = professor.createTaskActivity(title, description, objective, expectedDuration, mandatory, toDo);
         activityHashMap.put(newActivity.getId(), newActivity);
     }
 

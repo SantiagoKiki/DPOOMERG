@@ -6,6 +6,10 @@ import learningpath.question.MultipleOptionQuestion;
 
 public class QuizActivity extends Activity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double minScore;
 	private LinkedList<MultipleOptionQuestion> questions;
 
@@ -33,7 +37,10 @@ public class QuizActivity extends Activity {
 	}
 
 	public boolean addQuestion(MultipleOptionQuestion question) {
-		if (this.questions.contains(question)) {
+		if (question == null) {
+			System.err.println("Question can not be null.");
+		}
+		if (this.containsQuestion(question)) {
 			System.out.println("Question already added.");
 			return false;
 		}
@@ -42,7 +49,7 @@ public class QuizActivity extends Activity {
 	}
 	
 	public boolean removeQuestion(MultipleOptionQuestion question) {
-		if (this.questions.contains(question)) {
+		if (question != null && this.containsQuestion(question)) {
 			this.questions.remove(question);
 			return true;
 		}

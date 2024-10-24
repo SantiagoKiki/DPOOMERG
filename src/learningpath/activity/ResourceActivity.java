@@ -1,12 +1,15 @@
 package learningpath.activity;
 
-import java.util.LinkedList;
-
 public class ResourceActivity extends Activity {
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String url;
 
-	public ResourceActivity(String title, String description, String objective, int expectedDuration, boolean mandatory, String url) {
+	public ResourceActivity(String title, String description, String objective, int expectedDuration, boolean mandatory,
+			String url) {
 		super(title, description, objective, expectedDuration, mandatory);
 		this.url = url;
 	}

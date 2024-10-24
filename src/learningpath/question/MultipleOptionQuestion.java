@@ -1,8 +1,13 @@
 package learningpath.question;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class MultipleOptionQuestion {
+public class MultipleOptionQuestion implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String question;
 	private LinkedList<Option> options;
 
