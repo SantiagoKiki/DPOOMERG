@@ -1,12 +1,22 @@
 package consola;
 
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class UsersVerifier {
-    public static HashMap<String, String> usersDataBase = new HashMap<>();
+import persistencia.CentralPersistencia;
+
+public class UsersVerifier implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public static HashMap<String, String> usersDataBase = new HashMap<>();
     public static String currentUser = null;
+    private transient static CentralPersistencia centralPersistencia = new CentralPersistencia();
+
 
 
     public static boolean verifyLogin(String username, String password) {
@@ -65,6 +75,9 @@ public class UsersVerifier {
         }
 
         scanner.close();
+		centralPersistencia.guardar(usersDataBase);
+		
+
     }
     
     
