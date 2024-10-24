@@ -1,7 +1,6 @@
 package users;
 
 import learningpath.LearningPath;
-import learningpath.activity.Activity;
 import tracker.ActivityTracker;
 import tracker.ProgressTracker;
 
@@ -15,7 +14,7 @@ public class Student extends User {
     private LinkedList<ProgressTracker> progressTrackers;
     private LearningPath learningPathStudent;
     public final static String ROLE = "student";
-    private HashMap<LearningPath, String> reseñas = new HashMap();
+    private HashMap<LearningPath, String> resenas = new HashMap();
     
     public Student(String username, String password) {
         super(username, password);
@@ -58,21 +57,17 @@ public class Student extends User {
         }
     }
     
-    public void addReseña() {
+    public void addResena() {
         	Scanner teclado=new Scanner(System.in);
     		String rese = teclado.next();
-    		System.out.println("Ingrese la reseña:");
-    		reseñas.put(learningPathStudent, rese);
+    		System.out.println("Ingrese la resena:");
+    		resenas.put(learningPathStudent, rese);
     }
     
     public void enrollInLearningPath(LearningPath learningPath) {
         ProgressTracker progressTracker = new ProgressTracker(this.username, learningPath);
         progressTrackers.add(progressTracker);
         learningPath.addProgressTracker(progressTracker);
-    }
-    
-    public void completeActivity(Activity activity) {
-        
     }
     
     public float getProgress(ProgressTracker tracker) {
