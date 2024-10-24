@@ -7,6 +7,10 @@ import learningpath.question.MultipleOptionQuestion;
 
 public class ExamActivity extends Activity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LinkedList<OpenQuestion> openQuestions;
 	private LinkedList<MultipleOptionQuestion> MOQuestions;
 

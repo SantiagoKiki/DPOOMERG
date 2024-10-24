@@ -6,6 +6,10 @@ import learningpath.question.MultipleOptionQuestion;
 
 public class QuizActivity extends Activity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double minScore;
 	private LinkedList<MultipleOptionQuestion> questions;
 

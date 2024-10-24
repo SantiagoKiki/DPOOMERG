@@ -1,11 +1,16 @@
 package tracker;
 
+import java.io.Serializable;
 import java.util.Date;
 import learningpath.activity.Activity;
 
-public class ActivityTracker {
+public class ActivityTracker implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Activity activity;
 	private int dedicatedTime;
 	private String completionStatus;

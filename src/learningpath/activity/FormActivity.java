@@ -6,6 +6,10 @@ import learningpath.question.OpenQuestion;
 
 public class FormActivity extends Activity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LinkedList<OpenQuestion> questions;
 
 	public FormActivity(String title, String description, String objective, int expectedDuration, boolean mandatory,

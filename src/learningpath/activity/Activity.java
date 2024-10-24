@@ -1,12 +1,17 @@
 package learningpath.activity;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import tracker.ActivityTracker;
 import utils.Generator;
 
-public abstract class Activity {
+public abstract class Activity implements Serializable{
 
-    protected String id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected String id;
     protected String title;
     protected String description;
     protected String objective;

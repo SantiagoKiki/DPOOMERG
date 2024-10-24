@@ -3,11 +3,16 @@ package tracker;
 import learningpath.LearningPath;
 import learningpath.activity.Activity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class ProgressTracker{
+public class ProgressTracker implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String studentUsername;
 	private LearningPath learningpath;
 	private LinkedList<ActivityTracker> activityTrackers;

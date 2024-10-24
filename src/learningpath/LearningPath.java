@@ -1,5 +1,6 @@
 package learningpath;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import learningpath.activity.Activity;
@@ -13,7 +14,11 @@ import utils.Generator;
  * duration, rating, professor, creation date, update date, version, and a list
  * of activities.
  */
-public class LearningPath {
+public class LearningPath implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Attributes of the LearningPath
 	private final String id; // Unique identifier of the learning path
 	private String title; // Title of the learning path
@@ -29,7 +34,8 @@ public class LearningPath {
 	private int version; // Version of the learning path
 	private LinkedList<Activity> activities; // List of activities in the learning path
 	private LinkedList<ProgressTracker> progressTrackers; // List of progress trackers for students enrolled in the
-															// learning path
+	private LinkedList<String> reseñas;														// learning pathH
+	
 
 	/**
 	 * Constructor to initialize a LearningPath object with the given parameters.

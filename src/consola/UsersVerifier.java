@@ -15,7 +15,7 @@ public class UsersVerifier implements Serializable{
 	
 	public static HashMap<String, String> usersDataBase = new HashMap<>();
     public static String currentUser = null;
-    private transient static CentralPersistencia centralPersistencia = new CentralPersistencia();
+    public transient static CentralPersistencia centralPersistencia = new CentralPersistencia();
 
 
 

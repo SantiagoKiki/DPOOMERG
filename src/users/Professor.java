@@ -1,14 +1,23 @@
 package users;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import learningpath.*;
 import learningpath.activity.*;
 import learningpath.question.*;
+import persistencia.CentralPersistencia;
 
-public class Professor extends User {
-    private final LinkedList<LearningPath> createdLearningPaths;
+public class Professor extends User implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public final LinkedList<LearningPath> createdLearningPaths;
     private final LinkedList<Activity> createdActivities;
     private final static String ROLE = "professor";
+    public transient static CentralPersistencia centralPersistencia = new CentralPersistencia();
+
+    
     
     public Professor(String username, String password) {
         super(username, password);
@@ -212,4 +221,11 @@ public class Professor extends User {
         activity.removeFollowUp(index);
     }
 
+    public void guardarInfo() {
+    	
+    	centralPersistencia.guardar(createdLearningPaths);
+    	centralPersistencia.guardar(createdActivities);
+
+    }
+    
 }
