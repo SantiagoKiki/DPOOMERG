@@ -186,6 +186,14 @@ public class Professor extends User implements Serializable{
         createdActivities.add(activity);
         return activity;
     }
+    
+    public Activity createTrueFalseActivity (String title, String description, String objective,
+            int expectedDuration, boolean mandatory,
+            LinkedList<TrueFalseQuestion> questions) {
+    	Activity activity = new TrueFalseActivity(title, description, objective, expectedDuration, mandatory, questions);
+    	createdActivities.add(activity);
+    	return activity;
+    }
 
     public void editActivityTitle(Activity activity, String title) {
         activity.setTitle(title);

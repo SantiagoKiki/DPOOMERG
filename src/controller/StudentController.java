@@ -34,7 +34,7 @@ public class StudentController extends Controller {
 
         for(LearningPath learningPath : learningPathHashMap.values()) {
 
-            LinkedList tags = learningPath.getTags();
+            LinkedList<String> tags = learningPath.getTags();
             if(tags.contains(interest)) {
                 learningPaths.add(learningPath);
             }

@@ -4,17 +4,20 @@ import learningpath.LearningPath;
 import tracker.ActivityTracker;
 import tracker.ProgressTracker;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Student extends User {
-    private LinkedList<String> interests;
+public class Student extends User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private LinkedList<String> interests;
     private LinkedList<ProgressTracker> progressTrackers;
     private LearningPath learningPathStudent;
     public final static String ROLE = "student";
-    private HashMap<LearningPath, String> resenas = new HashMap();
+    private HashMap<LearningPath, String> resenas = new HashMap<>();
     
     public Student(String username, String password) {
         super(username, password);
@@ -58,10 +61,11 @@ public class Student extends User {
     }
     
     public void addResena() {
-        	Scanner teclado=new Scanner(System.in);
-    		String rese = teclado.next();
-    		System.out.println("Ingrese la resena:");
-    		resenas.put(learningPathStudent, rese);
+        	try (Scanner teclado = new Scanner(System.in)) {
+				String rese = teclado.next();
+				System.out.println("Ingrese la resena:");
+				resenas.put(learningPathStudent, rese);
+			}
     }
     
     public void enrollInLearningPath(LearningPath learningPath) {

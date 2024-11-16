@@ -178,6 +178,11 @@ public class ProfessorController extends Controller {
         Activity newActivity = professor.createTaskActivity(title, description, objective, expectedDuration, mandatory, toDo);
         activityHashMap.put(newActivity.getId(), newActivity);
     }
+    
+    public void createTrueFalseActivity(String title, String description, String objective, int expectedDuration, boolean mandatory, LinkedList<TrueFalseQuestion> questions) {
+    	Activity newActivity = professor.createTrueFalseActivity(title, description, objective, expectedDuration, mandatory, questions);
+    	activityHashMap.put(newActivity.getId(), newActivity);
+    }
 
     public void editCurrentActivityTitle(String title) {
         professor.editActivityTitle(currentActivity, title);
