@@ -7,15 +7,20 @@ import tracker.ActivityTracker;
 import tracker.ProgressTracker;
 import users.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class StudentController extends Controller {
+public class StudentController extends Controller implements Serializable{
 
-    public static ArrayList<Student> arrayStudents;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static ArrayList<Student> arrayStudents = new ArrayList<Student>();
     private LearningPath currentLearningPath;
     private ProgressTracker currentProgressTracker;
     private ActivityTracker currentActivityTracker;
@@ -186,6 +191,16 @@ public class StudentController extends Controller {
 	}
 	public CentralPersistencia getCentralPersistencia() {
 		return centralPersistencia;
+	}
+
+	public boolean isStudentRegistered(String login) {
+		for(Student elements : arrayStudents)
+		{
+			if (elements.equals(login)){
+				return true;
+			}
+		}
+		return false;
 	}
     
     

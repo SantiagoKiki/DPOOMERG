@@ -15,20 +15,19 @@ public class ViewLogin {
 		this.scanner = new Scanner(System.in);
 	}
 	
-	private ProfessorController profController;
 	private StudentController studentController;
 	
-	public ViewLogin(ProfessorController profController,  StudentController studentController) {
-		this.profController = profController;
+	public ViewLogin( StudentController studentController) {
 		this.studentController = studentController;
+		this.scanner = new Scanner(System.in);
 
 	}
-	
+
 	public void mostrarMenu() {
 		 System.out.println("\n===========================================");
-		 System.out.println("Bienvenido al sistema de la Galería");
+		 System.out.println("Bienvenido al sistema");
 		 System.out.println("===========================================\n");
-		if (profController != null && studentController != null) {
+		if (studentController != null) {
 			
 			System.out.println("Iniciar sesión ");
 			String login = getInput("\nUsuario: ");
@@ -67,7 +66,7 @@ public class ViewLogin {
 	public void usuarioNoRegistrado() {
 		boolean opcion = getInputY_N("\nEl usuario no se encuentra registrado. ¿Deseas registrarte?");
 		if(opcion) {				
-			ViewRegister viewRegistro = new ViewRegister(studentController, profController);
+			ViewRegister viewRegistro = new ViewRegister(studentController);
 			viewRegistro.mostrarMenuUsuario("Usuario");
 		} else {
 			mostrarMenu();

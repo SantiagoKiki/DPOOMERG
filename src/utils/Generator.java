@@ -20,7 +20,7 @@ public class Generator implements Serializable {
         db.put("Activity", new LinkedList<>());
         db.put("LearningPath", new LinkedList<>());
     }
-
+    
     public static synchronized Generator getInstance() {
         if (instance == null) {
             instance = new Generator();

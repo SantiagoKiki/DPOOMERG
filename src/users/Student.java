@@ -14,7 +14,7 @@ import consola.StudentConsola;
 import controller.StudentController;
 
 public class Student extends User implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 	private LinkedList<String> interests;
     private LinkedList<ProgressTracker> progressTrackers;
@@ -22,6 +22,7 @@ public class Student extends User implements Serializable {
     public final static String ROLE = "student";
     private HashMap<LearningPath, String> resenas = new HashMap<>();
     private StudentConsola viewStudent;
+    public static HashMap<String, LearningPath> mapaLearningPaths = new HashMap<>();;
     
     public Student(String username, String password) {
         super(username, password);

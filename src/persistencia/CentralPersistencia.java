@@ -31,7 +31,7 @@ public class CentralPersistencia {
             e.printStackTrace();
         }
     }
-    
+   
     public void guardar2(Serializable object) {
         String path = "./Data/database.ser"; 
         File directory = new File("./Data/");
