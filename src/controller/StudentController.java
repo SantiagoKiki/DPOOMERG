@@ -2,10 +2,12 @@ package controller;
 
 import learningpath.*;
 import learningpath.activity.*;
+import persistencia.CentralPersistencia;
 import tracker.ActivityTracker;
 import tracker.ProgressTracker;
 import users.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,16 +15,17 @@ import java.util.LinkedList;
 
 public class StudentController extends Controller {
 
-    private Student student;
+    public static ArrayList<Student> arrayStudents;
     private LearningPath currentLearningPath;
     private ProgressTracker currentProgressTracker;
     private ActivityTracker currentActivityTracker;
     private LinkedList<LearningPath> learningPathsByInterest;
+    private Student student;
+    private CentralPersistencia centralPersistencia;
 
-
-    public StudentController(HashMap<String, User> userHashMap, HashMap<String, LearningPath> learningPathHashMap, HashMap<String, Activity> activityHashMap, User currentUser) {
+    public StudentController(HashMap<String, User> userHashMap, HashMap<String, LearningPath> learningPathHashMap, HashMap<String, Activity> activityHashMap, Student currentUser) {
         super(userHashMap, learningPathHashMap, activityHashMap, currentUser);
-        student = (Student) currentUser;
+        student = currentUser;
 
     }
 
@@ -137,6 +140,56 @@ public class StudentController extends Controller {
     public void recordActivityCompletion() {
         currentProgressTracker.recordActivityCompletion(currentActivityTracker);
     }
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public LearningPath getCurrentLearningPath() {
+		return currentLearningPath;
+	}
+
+	public void setCurrentLearningPath(LearningPath currentLearningPath) {
+		this.currentLearningPath = currentLearningPath;
+	}
+
+	public ProgressTracker getCurrentProgressTracker() {
+		return currentProgressTracker;
+	}
+
+	public void setCurrentProgressTracker(ProgressTracker currentProgressTracker) {
+		this.currentProgressTracker = currentProgressTracker;
+	}
+
+	public ActivityTracker getCurrentActivityTracker() {
+		return currentActivityTracker;
+	}
+
+	public void setCurrentActivityTracker(ActivityTracker currentActivityTracker) {
+		this.currentActivityTracker = currentActivityTracker;
+	}
+
+	public LinkedList<LearningPath> getLearningPathsByInterest() {
+		return learningPathsByInterest;
+	}
+
+	public void setLearningPathsByInterest(LinkedList<LearningPath> learningPathsByInterest) {
+		this.learningPathsByInterest = learningPathsByInterest;
+	}
+
+	public void setCentralPersistencia(CentralPersistencia centralPersistencia) {
+		this.centralPersistencia = centralPersistencia;
+	}
+	public CentralPersistencia getCentralPersistencia() {
+		return centralPersistencia;
+	}
+    
+    
+    
 }
 
 

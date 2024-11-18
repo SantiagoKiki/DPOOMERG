@@ -78,6 +78,6 @@ public class Generator implements Serializable {
     }
 
     public void guardarInfo() {
-        centralPersistencia.guardar(db);
+        centralPersistencia.guardar2(db);
     }
 }

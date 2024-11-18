@@ -10,6 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import consola.StudentConsola;
+import controller.StudentController;
+
 public class Student extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,11 +21,13 @@ public class Student extends User implements Serializable {
     private LearningPath learningPathStudent;
     public final static String ROLE = "student";
     private HashMap<LearningPath, String> resenas = new HashMap<>();
+    private StudentConsola viewStudent;
     
     public Student(String username, String password) {
         super(username, password);
         this.interests = new LinkedList<>();
         this.progressTrackers = new LinkedList<>();
+        StudentController.arrayStudents.add(this);
     }
 
     public LinkedList<String> getInterests() {
@@ -77,5 +82,17 @@ public class Student extends User implements Serializable {
     public float getProgress(ProgressTracker tracker) {
         return tracker.getProgress();
     }
+    
+    
+    public StudentConsola getViewStudent() 
+    {
+    	return viewStudent;
+    }
+    
+    public void setViewStudent(StudentConsola viewStudent) {
+		this.viewStudent = viewStudent;
+	}
+    
+    
 }
 	
