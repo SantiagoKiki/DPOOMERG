@@ -36,28 +36,40 @@ public class QuizActivity extends Activity {
 		this.questions = questions;
 	}
 
-	public boolean addQuestion(MultipleOptionQuestion question) {
+	public void addQuestion(MultipleOptionQuestion question) throws NullPointerException, IllegalArgumentException {
 		if (question == null) {
-			System.err.println("Question can not be null.");
+			throw new NullPointerException("Question can not be null");
 		}
 		if (this.containsQuestion(question)) {
-			System.out.println("Question already added.");
-			return false;
+			throw new IllegalArgumentException("Question already added to the quiz.");
 		}
 		this.questions.add(question);
-		return true;
 	}
 	
-	public boolean removeQuestion(MultipleOptionQuestion question) {
-		if (question != null && this.containsQuestion(question)) {
-			this.questions.remove(question);
-			return true;
+	public void removeQuestion(MultipleOptionQuestion question) throws NullPointerException, IllegalArgumentException {
+		
+		if (question == null) {
+			throw new NullPointerException("Question can not be null.");
 		}
-		System.out.println("There's no question like that.");
-		return false;
+		
+		if (!this.containsQuestion(question)) {
+			throw new IllegalArgumentException("Question not found.");
+		}
+		questions.remove(question);
 	}
 	
 	public boolean containsQuestion(MultipleOptionQuestion question) {
 		return this.questions.contains(question);
+	}
+	
+	public double calculateScore(int questionRate) {
+		double score = 0;
+		if (questions.isEmpty()) {
+            return 0.0;
+		}
+		for (MultipleOptionQuestion question : questions) {
+			score += question.rate(questionRate);
+		}
+		return score / questions.size();
 	}
 }
