@@ -34,9 +34,7 @@ public class StudentController extends Controller implements Serializable{
 
     }
 
-    // Query methods
-
-    public LinkedList<LearningPath> getLearningPathsByInterest(String interest) {
+	public LinkedList<LearningPath> getLearningPathsByInterest(String interest) {
 
         LinkedList<LearningPath> learningPaths = new LinkedList<>();
 
