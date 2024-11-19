@@ -42,6 +42,15 @@ public class Student extends User implements Serializable {
     public ProgressTracker getProgressTrackerByIndex(int index) {
         return progressTrackers.get(index);
     }
+    
+    public ProgressTracker getProgressTrackerByLearningPath(LearningPath learningPath) {
+        for (ProgressTracker tracker : progressTrackers) {
+            if (tracker.getLearningpath().equals(learningPath)) {
+                return tracker;
+            }
+        }
+        return null;
+    }
 
     public List<ActivityTracker> getActivityTrackers(ProgressTracker progressTracker) {
         return progressTracker.getActivityTrackers();
