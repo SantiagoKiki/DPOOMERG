@@ -41,6 +41,7 @@ public class ViewLogin {
 				{validarPasswordProfessor(login);
 				User usuario = studentController.getStudent();
 				iniciarSesion(usuario);
+				
 				}
 				System.out.println("\nInicio de sesión exitoso.");
 			}
@@ -65,6 +66,7 @@ public class ViewLogin {
 		if(opcion) {				
 			ViewRegister viewRegistro = new ViewRegister(studentController);
 			viewRegistro.mostrarMenuUsuario("Usuario");
+		
 		} else {
 			mostrarMenu();
 		}

@@ -66,15 +66,14 @@ public class LearningPath implements Serializable {
 		this.version = 1; // Initial version is set to 1
 		this.activities = new LinkedList<>(); // Initialize the list of activities
 		this.progressTrackers = new LinkedList<>(); // Initialize the list of progress trackers
-		allLearningPath.add(this);
 		try {
-		Student.mapaLearningPaths.put(id, this);
+		Student.mapaLearningPaths.put(this.id, this);
 		}
 		catch(Exception e)
 		{
 			System.out.println("Ya se encuentra este learningPath");
 		}
-		
+		allLearningPath.add(this);
 	}
 
 	// Getter and setter methods for each attribute

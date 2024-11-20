@@ -1,14 +1,16 @@
 package consola;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.ProfessorController;
 import controller.StudentController;
+import persistencia.CentralPersistencia;
 import users.Professor;
 import users.Student;
 
-public class ViewRegister {
+public class ViewRegister implements Serializable{
 	protected Scanner scanner ; 
 	private StudentController studentController;
 	/**
@@ -56,6 +58,7 @@ public class ViewRegister {
 		String nombre = capitalize(getInput("\nNombre: ").trim());
 		String apellido = capitalize(getInput("\nApellido: ").trim());
 		String cedula = String.valueOf(getInputInt("\nCédula: "));
+		CentralPersistencia centralPersistencia = new CentralPersistencia();
 		
 		switch(tipoUsuario) {
 		
@@ -68,6 +71,7 @@ public class ViewRegister {
 			StudentConsola viewStudent = new StudentConsola(student);
 			student.setViewStudent(viewStudent);
 			viewStudent.mostrarMenu();
+			centralPersistencia.cargarStudent();
 			break;
 			
 		}

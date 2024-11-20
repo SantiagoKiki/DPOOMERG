@@ -1,5 +1,6 @@
 package consola;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ import users.Student;
 import users.User;
 
 
-public class StudentConsola {
+public class StudentConsola implements Serializable {
 	
 	
 	private static Student studentOwn;
@@ -30,7 +31,7 @@ public class StudentConsola {
 	public LinkedList<OpenQuestion> questions = null;
 	public ResourceActivity actividad1 = new ResourceActivity("Titulo Ingenioso", "En esta actividad tienes que...", "El objetivo es....", 20, true, "");
 	public LearningPath learningPathPrueba = new LearningPath("1", "Sistemas", "Ingeniería en sistemas",  arrayIntereses, 4,  arrayEtiquetas,ivan);
-	
+	public CentralPersistencia persistir = new CentralPersistencia();
 
 	public StudentConsola(Student studentOwn) {
 		super();
@@ -70,19 +71,21 @@ public class StudentConsola {
 						System.out.println("Rating: " + elements.getRating() + " \n");
 						System.out.println("Id: " + elements.getId() + " \n");
 						System.out.println("===========================================\\n");
+						mostrarMenu();
 					}
-					studentOwn.enrollInLearningPath(null);
 			 	break;
 				case "2":
 					System.out.println("Por favor ingrese la id del LearningPath a inscribir: \n");
 			        String numero = getInput("\nIngrese la id: ").trim();
 			        LearningPath learningPath= studentOwn.mapaLearningPaths.get(numero);
 			        studentController.setCurrentLearningPath(learningPath);
+					mostrarMenu();
 			    break;
 				case"3":
 					System.out.println("Ingrese la id del LearningPath a consultar: \n");
 					String idLearningPathActividad = getInput("\nIngrese la id: ").trim();
 			        LearningPath learningPathIterable= studentOwn.mapaLearningPaths.get(idLearningPathActividad);
+			        if (learningPathIterable != null) {
 					System.out.println("Las siguientes son las actividades del learningPath escogido \n");
 					for(Activity actividadesLearningPath : learningPathIterable.getActivities()){
 						System.out.println("El titulo de la actividad es:"+  actividadesLearningPath.getTitle()  +" \n");
@@ -90,9 +93,17 @@ public class StudentConsola {
 						System.out.println("El objetivo de la actividad es:"+  actividadesLearningPath.getObjective()  +" \n");
 						System.out.println("La id de la actividad es:"+  actividadesLearningPath.getId()  +" \n");
 						System.out.println("===========================================\\n");
+						
 
 						
 					}
+					}
+			        else {
+						System.out.println("Learning Path No encontrado \n");
+
+			        }
+					mostrarMenu();
+
 			        
 
 			} 
@@ -114,7 +125,6 @@ public class StudentConsola {
 	     LearningPath learningPath = (LearningPath) centralPersistencia.cargar();
 	     StudentController studentPersistir = (StudentController) centralPersistencia.cargar();
 	     StudentController studentController = new StudentController(null, null, null, studentOwn);
-	     Object data = centralPersistencia.cargar();
 	     Object dataStudent = centralPersistencia.cargarStudent(); 
 
 
@@ -144,13 +154,12 @@ public class StudentConsola {
 
 	     	learningPathHashMap.put("1", learningPath);
 	     	
-
 	        StudentController studentController1 = new StudentController(userHashMap, learningPathHashMap, activityHashMap, currentUser);
 
 	        if (dataStudent != null) {
 	        	studentController = (StudentController) dataStudent;
 	            studentController.setCentralPersistencia(centralPersistencia);
-	            System.out.println("Galería cargada con éxito");
+	            System.out.println("Cargada con éxito");
 	            ViewLogin viewLogin = new ViewLogin(studentController);
 	            viewLogin.mostrarMenu();
 	        } else {
@@ -159,7 +168,7 @@ public class StudentConsola {
 	        }
 	        ViewLogin viewLogin = new ViewLogin(studentPersistir); 
 	        viewLogin.mostrarMenu();
-		System.out.println("Hola usuario porfavor ingresa tus datos");
+	        System.out.println("Hola usuario porfavor ingresa tus datos");
 	}
 	
 	
