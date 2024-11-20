@@ -36,15 +36,12 @@ public class ViewLogin {
 				{validarPasswordStudent(login);
 				User usuario = studentController.getStudent();
 				iniciarSesion(usuario);
-
-
 				}
 				if(ProfessorController.arrayProfes.contains(login)) 
 				{validarPasswordProfessor(login);
 				User usuario = studentController.getStudent();
 				iniciarSesion(usuario);
 				}
-				
 				System.out.println("\nInicio de sesión exitoso.");
 			}
 			else {
