@@ -85,6 +85,7 @@ public class StudentConsola implements Serializable {
 			        studentController.setCurrentLearningPath(learningPath);
 					mostrarMenu();
 			    break;
+			   
 				case"3":
 					System.out.println("Ingrese la id del LearningPath a consultar: \n");
 					String idLearningPathActividad = getInput("\nIngrese la id: ").trim();
@@ -101,8 +102,8 @@ public class StudentConsola implements Serializable {
 
 						
 					}
-				break;
-
+			        }
+			        break;
 				case"4":
 					System.out.println("\n Generar Reseña para un Learning Path");
 					if (studentOwn.mapaLearningPaths.isEmpty()) {
