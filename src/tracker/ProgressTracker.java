@@ -26,6 +26,7 @@ public class ProgressTracker implements Serializable{
 		
 		this.studentUsername = studentUsername;
 		this.learningpath = learningpath;
+		this.activityTrackers = new LinkedList<>();
 		for (Activity activity: learningpath.getActivities()) {
 			activityTrackers.add(new ActivityTracker(activity));
 		}

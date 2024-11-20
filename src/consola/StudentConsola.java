@@ -11,6 +11,7 @@ import learningpath.activity.Activity;
 import learningpath.activity.ResourceActivity;
 import learningpath.question.OpenQuestion;
 import persistencia.CentralPersistencia;
+import tracker.ProgressTracker;
 import users.Professor;
 import users.Student;
 import users.User;
@@ -52,6 +53,9 @@ public class StudentConsola implements Serializable {
         System.out.println("1. Ver Learning Paths \n");
         System.out.println("2. Inscribir tu Learning Path \n");
         System.out.println("3. Ver actividades de los Learnings Paths \n");
+        System.out.println("4. Generar reseña para un Learning Path \n");
+        System.out.println("5. Calificar una actividad \n");
+        System.out.println("6. Consultar progreso en un Learning Path \n");
         System.out.println("0. Cerrar sesión \n");
        
         
@@ -97,15 +101,43 @@ public class StudentConsola implements Serializable {
 
 						
 					}
+				break;
+
+				case"4":
+					System.out.println("\n Generar Reseña para un Learning Path");
+					if (studentOwn.mapaLearningPaths.isEmpty()) {
+	                    System.out.println("No tienes Learning Paths inscritos.");
+	                    break;   
 					}
-			        else {
-						System.out.println("Learning Path No encontrado \n");
-
-			        }
-					mostrarMenu();
-
-			        
-
+					for (String id : studentOwn.mapaLearningPaths.keySet()) {
+					    LearningPath lp = studentOwn.mapaLearningPaths.get(id);
+					    System.out.println("ID: " + id + ", Título: " + lp.getTitle());
+					}
+					String idLearningPathResena = getInput("Ingrese el ID del Learning Path para el que desea generar una reseña: ").trim();
+	                LearningPath selectedPath = studentOwn.mapaLearningPaths.get(idLearningPathResena);
+	                if (selectedPath == null) {
+	                    System.out.println("El ID ingresado no corresponde a un Learning Path inscrito.");
+	                    break;
+	                }
+	                break;
+				case"6":
+					if (studentOwn.mapaLearningPaths.isEmpty()) {
+	                    System.out.println("No tienes Learning Paths inscritos.");
+	                    break;
+	                }
+					for (String id : studentOwn.mapaLearningPaths.keySet()) {
+					    LearningPath lp = studentOwn.mapaLearningPaths.get(id);
+					    System.out.println("ID: " + id + ", Título: " + lp.getTitle());
+					}
+					String idLearningPathProgreso = getInput("Ingrese el ID del Learning Path que desea consultar: ").trim();
+					LearningPath selectedPathProgreso = studentOwn.mapaLearningPaths.get(idLearningPathProgreso);
+					if (selectedPathProgreso == null) {
+	                    System.out.println("El ID ingresado no corresponde a un Learning Path inscrito.");
+	                    break;
+	                }
+					ProgressTracker tracker = studentOwn.getProgressTrackerByLearningPath(selectedPathProgreso);
+					System.out.println("Progreso actual: " + tracker.getProgress() + "%");
+					break;
 			} 
 		} else {
 			ViewLogin studentConsole = new ViewLogin(studentOwn.getViewStudent());
