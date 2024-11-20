@@ -9,13 +9,13 @@ import users.Professor;
 import users.Student;
 
 public class ViewRegister {
-	protected Scanner scanner; 
+	protected Scanner scanner ; 
 	private StudentController studentController;
 	/**
 	 * Constructor
 	 */
 	public ViewRegister(StudentController studentController) {
-
+		this.scanner = new Scanner(System.in);
 		this.studentController = studentController;
 	}
 	
@@ -23,7 +23,7 @@ public class ViewRegister {
 	 * Menús
 	 */
 	public void mostrarMenuUsuario(String tipoUsuario) {
-		if (studentController.getStudent().getRole().equals(tipoUsuario)) {
+		if (tipoUsuario != null) {
 			mostrarMenuStudent();
 		} 
 	}
@@ -35,7 +35,7 @@ public class ViewRegister {
 	public void mostrarMenuStudent() {
 		 System.out.println("\n===========================================");
 		 System.out.println("Configuración inicial");
-         System.out.println("No hay ningún administrador configurado en el sistema.\n");
+         System.out.println("No hay ningún estudiante configurado en el sistema.\n");
          System.out.println("Como primer paso, debes crear una cuenta de estudiante.");
          registrarNuevoUsuario("student");
 	}

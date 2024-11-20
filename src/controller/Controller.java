@@ -118,7 +118,7 @@ public class Controller {
                     StudentController newInstance = new StudentController(this.userHashMap, this.learningPathHashMap, this.activityHashMap, (Student) user);
                     return newInstance;
                 } else if (user.getRole().equals("Professor")) {
-                    ProfessorController newInstance = new ProfessorController(this.userHashMap, this.learningPathHashMap, this.activityHashMap, user);
+                    ProfessorController newInstance = new ProfessorController(this.userHashMap, this.learningPathHashMap, this.activityHashMap, (Professor) user);
                     return newInstance;
                 }
             }
