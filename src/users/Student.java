@@ -10,19 +10,25 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Student extends User implements Serializable {
+import consola.StudentConsola;
+import controller.StudentController;
 
+public class Student extends User implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	private LinkedList<String> interests;
     private LinkedList<ProgressTracker> progressTrackers;
     private LearningPath learningPathStudent;
     public final static String ROLE = "student";
     private HashMap<LearningPath, String> resenas = new HashMap<>();
+    private StudentConsola viewStudent;
+    public static HashMap<String, LearningPath> mapaLearningPaths = new HashMap<>();;
     
     public Student(String username, String password) {
         super(username, password);
         this.interests = new LinkedList<>();
         this.progressTrackers = new LinkedList<>();
+        StudentController.arrayStudents.add(this);
     }
 
     public LinkedList<String> getInterests() {
@@ -35,6 +41,15 @@ public class Student extends User implements Serializable {
 
     public ProgressTracker getProgressTrackerByIndex(int index) {
         return progressTrackers.get(index);
+    }
+    
+    public ProgressTracker getProgressTrackerByLearningPath(LearningPath learningPath) {
+        for (ProgressTracker tracker : progressTrackers) {
+            if (tracker.getLearningpath().equals(learningPath)) {
+                return tracker;
+            }
+        }
+        return null;
     }
 
     public List<ActivityTracker> getActivityTrackers(ProgressTracker progressTracker) {
@@ -77,5 +92,17 @@ public class Student extends User implements Serializable {
     public float getProgress(ProgressTracker tracker) {
         return tracker.getProgress();
     }
+    
+    
+    public StudentConsola getViewStudent() 
+    {
+    	return viewStudent;
+    }
+    
+    public void setViewStudent(StudentConsola viewStudent) {
+		this.viewStudent = viewStudent;
+	}
+    
+    
 }
 	

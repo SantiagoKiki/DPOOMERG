@@ -2,6 +2,8 @@ package tracker;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
+
 import learningpath.activity.Activity;
 
 public class ActivityTracker implements Serializable{
@@ -16,7 +18,7 @@ public class ActivityTracker implements Serializable{
 	private String completionStatus;
 	protected Date startDate;
 	protected Date completionDate;
-	
+	private LinkedList<Integer> ratings;
 	
 	public ActivityTracker(Activity activity) {
 		this.activity = activity;
@@ -24,6 +26,7 @@ public class ActivityTracker implements Serializable{
 		this.completionStatus = "Not started";
 		this.startDate = null;
 		this.completionDate = null;
+		this.ratings = new LinkedList<>();
 		activity.addActivityTracker(this);
 	}
 	
@@ -66,6 +69,25 @@ public class ActivityTracker implements Serializable{
 
 	public void setCompletionDate(Date completionDate) {
 		this.completionDate = completionDate;
+	}
+	
+	public void addRating(int rating) {
+        if (rating < 1 || rating > 5) {
+            throw new IllegalArgumentException("La calificacion debe estar entre 1 y 5");
+        }
+        ratings.add(rating);
+    }
+	
+	public double getAverageRating() {
+	    if (ratings.isEmpty()) {
+	        return 0.0;
+	    }
+
+	    int sum = 0;
+	    for (int rating : ratings) {
+	        sum += rating;
+	    }
+	    return (double) sum / ratings.size();
 	}
 
 	public void recordActivityStart() {

@@ -115,10 +115,10 @@ public class Controller {
             User user = userHashMap.get(username);
             if (user.authenticate(password)) {
                 if (user.getRole().equals("Student")) {
-                    StudentController newInstance = new StudentController(this.userHashMap, this.learningPathHashMap, this.activityHashMap, user);
+                    StudentController newInstance = new StudentController(this.userHashMap, this.learningPathHashMap, this.activityHashMap, (Student) user);
                     return newInstance;
                 } else if (user.getRole().equals("Professor")) {
-                    ProfessorController newInstance = new ProfessorController(this.userHashMap, this.learningPathHashMap, this.activityHashMap, user);
+                    ProfessorController newInstance = new ProfessorController(this.userHashMap, this.learningPathHashMap, this.activityHashMap, (Professor) user);
                     return newInstance;
                 }
             }

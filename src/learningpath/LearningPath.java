@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import learningpath.activity.Activity;
 import tracker.ProgressTracker;
 import users.Professor;
+import users.Student;
 import utils.Generator;
 
 /**
@@ -35,7 +36,7 @@ public class LearningPath implements Serializable {
 	private LinkedList<Activity> activities; // List of activities in the learning path
 	private LinkedList<ProgressTracker> progressTrackers; // List of progress trackers for students enrolled in the
 	private LinkedList<String> reseñas;														// learning pathH
-	
+	public static LinkedList<LearningPath> allLearningPath = new LinkedList();
 
 	/**
 	 * Constructor to initialize a LearningPath object with the given parameters.
@@ -65,6 +66,14 @@ public class LearningPath implements Serializable {
 		this.version = 1; // Initial version is set to 1
 		this.activities = new LinkedList<>(); // Initialize the list of activities
 		this.progressTrackers = new LinkedList<>(); // Initialize the list of progress trackers
+		try {
+		Student.mapaLearningPaths.put(this.id, this);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Ya se encuentra este learningPath");
+		}
+		allLearningPath.add(this);
 	}
 
 	// Getter and setter methods for each attribute

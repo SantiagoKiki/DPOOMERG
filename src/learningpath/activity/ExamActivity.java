@@ -21,7 +21,6 @@ public class ExamActivity extends Activity {
 		this.openQuestions = openQuestions != null ? openQuestions : new LinkedList<>();
 		this.MOQuestions = MOQuestions != null ? MOQuestions : new LinkedList<>();
 	}
-
 	public LinkedList<OpenQuestion> getOpenQuestions() {
 		return openQuestions;
 	}

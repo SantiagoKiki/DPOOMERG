@@ -2,6 +2,10 @@ package users;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+
+import consola.ProfessorConsola;
+import consola.StudentConsola;
+import controller.ProfessorController;
 import learningpath.*;
 import learningpath.activity.*;
 import learningpath.question.*;
@@ -16,6 +20,7 @@ public class Professor extends User implements Serializable{
     private final LinkedList<Activity> createdActivities;
     private final static String ROLE = "professor";
     public transient static CentralPersistencia centralPersistencia = new CentralPersistencia();
+    private ProfessorConsola viewProfessor;
 
     
     
@@ -187,13 +192,7 @@ public class Professor extends User implements Serializable{
         return activity;
     }
     
-    public Activity createTrueFalseActivity (String title, String description, String objective,
-            int expectedDuration, boolean mandatory,
-            LinkedList<TrueFalseQuestion> questions) {
-    	Activity activity = new TrueFalseActivity(title, description, objective, expectedDuration, mandatory, questions);
-    	createdActivities.add(activity);
-    	return activity;
-    }
+
 
     public void editActivityTitle(Activity activity, String title) {
         activity.setTitle(title);
@@ -228,12 +227,16 @@ public class Professor extends User implements Serializable{
     public void removeFollowUpActivityFromActivityByIndex(Activity activity, int index) {
         activity.removeFollowUp(index);
     }
+    
+    
+	public void setViewProfessor(ProfessorConsola viewProfessor) {
+		this.viewProfessor = viewProfessor;
+	}
 
-    public void guardarInfo() {
-    	
-    	centralPersistencia.guardar(createdLearningPaths);
-    	centralPersistencia.guardar(createdActivities);
-
-    }
+	public ProfessorConsola getViewProfessor() {
+		return viewProfessor;
+	}
+	
+	
     
 }

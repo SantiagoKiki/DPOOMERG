@@ -17,8 +17,6 @@ public class UsersVerifier implements Serializable{
     public static String currentUser = null;
     public transient static CentralPersistencia centralPersistencia = new CentralPersistencia();
 
-
-
     public static boolean verifyLogin(String username, String password) {
         return usersDataBase.containsKey(username) && usersDataBase.get(username).equals(password);
     }
@@ -75,12 +73,11 @@ public class UsersVerifier implements Serializable{
         }
 
         scanner.close();
-		centralPersistencia.guardar(usersDataBase);
+	    centralPersistencia.guardar2(usersDataBase);
 		
 
     }
-    
-    
+
 	public static HashMap<String, String> getUsersDataBase() {
 		return usersDataBase;
 	}

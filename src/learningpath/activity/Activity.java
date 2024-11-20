@@ -20,7 +20,7 @@ public abstract class Activity implements Serializable{
     protected LinkedList<ActivityTracker> activityTrackers;
     protected LinkedList<Activity> prerequisites;
     protected LinkedList<Activity> followUpActivities;
-
+    
     public Activity(String title, String description, String objective, int expectedDuration, boolean mandatory) {
         Generator u = Generator.getInstance();
         this.id = u.generateId("Activity");
