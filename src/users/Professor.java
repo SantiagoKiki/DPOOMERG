@@ -16,14 +16,13 @@ public class Professor extends User implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public final LinkedList<LearningPath> createdLearningPaths;
-    private final LinkedList<Activity> createdActivities;
-    private final static String ROLE = "professor";
+
+    public  LinkedList<LearningPath> createdLearningPaths;
+    private LinkedList<Activity> createdActivities;
+    private final static String ROLE = "PROFESSOR";
     public transient static CentralPersistencia centralPersistencia = new CentralPersistencia();
     private ProfessorConsola viewProfessor;
 
-    
-    
     public Professor(String username, String password) {
         super(username, password);
         this.createdLearningPaths = new LinkedList<>();
@@ -38,8 +37,16 @@ public class Professor extends User implements Serializable{
         return createdLearningPaths.get(index);
     }
 
+    public void setCreatedLearningPaths(LinkedList<LearningPath> createdLearningPaths) {
+        this.createdLearningPaths = createdLearningPaths;
+    }
+
     public LinkedList<Activity> getCreatedActivities() {
         return createdActivities;
+    }
+
+    public void setCreatedActivities(LinkedList<Activity> createdActivities) {
+        this.createdActivities = createdActivities;
     }
 
     public Activity getCreatedActivityByIndex(int index) {
@@ -51,8 +58,10 @@ public class Professor extends User implements Serializable{
         return ROLE;
     }
 
-    public LearningPath createLearningPath(String id, String title, String description, LinkedList<String> objectives, int difficultyLevel, LinkedList<String> tags) {
-        LearningPath learningPath = new LearningPath(id, title, description, objectives, difficultyLevel, tags, this);
+    // Learning path management methods
+
+    public LearningPath createLearningPath(String title, String description, LinkedList<String> objectives, int difficultyLevel, LinkedList<String> tags) {
+        LearningPath learningPath = new LearningPath(title, description, objectives, difficultyLevel, tags, this);
         createdLearningPaths.add(learningPath);
         return learningPath;
     }
@@ -227,8 +236,8 @@ public class Professor extends User implements Serializable{
     public void removeFollowUpActivityFromActivityByIndex(Activity activity, int index) {
         activity.removeFollowUp(index);
     }
-    
-    
+
+
 	public void setViewProfessor(ProfessorConsola viewProfessor) {
 		this.viewProfessor = viewProfessor;
 	}
@@ -236,7 +245,7 @@ public class Professor extends User implements Serializable{
 	public ProfessorConsola getViewProfessor() {
 		return viewProfessor;
 	}
-	
-	
+
+
     
 }

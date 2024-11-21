@@ -16,7 +16,7 @@ public class ProfessorController extends Controller {
     private LearningPath currentLearningPath;
     private Activity currentActivity;
     public static ArrayList<Professor> arrayProfes = new ArrayList<Professor>();
-    
+
     /**
      * Constructs a new ProfessorController with the specified hash maps and
      * current user.
@@ -44,15 +44,12 @@ public class ProfessorController extends Controller {
         return professor.getCreatedLearningPaths();
     }
 
-    /**
-     * Retrieves a learning path by its index from a professor's learning paths.
-     *
-     * @param index The index of the learning path.
-     * @return The learning path at the specified index.
-     */
-    public LearningPath getProfessorLearningPathByIndex(int index) {
-        currentLearningPath = professor.getLearningPathByIndex(index);
-        return currentLearningPath;
+    public void setCurrentLearningPath(LearningPath learningPath) {
+        currentLearningPath = learningPath;
+    }
+
+    public void setCurrentActivity(Activity activity) {
+        currentActivity = activity;
     }
 
     /**
@@ -106,7 +103,6 @@ public class ProfessorController extends Controller {
     /**
      * Creates a new learning path and adds it to the hash map.
      *
-     * @param id The ID of the new learning path.
      * @param title The title of the new learning path.
      * @param description The description of the new learning path.
      * @param objectives The objectives of the new learning path.
@@ -114,8 +110,8 @@ public class ProfessorController extends Controller {
      * @param tags The tags associated with the new learning path.
      * @param professor The professor creating the new learning path.
      */
-    public void createLearningPath(String id, String title, String description, LinkedList<String> objectives, int difficultyLevel, LinkedList<String> tags, Professor professor) {
-        LearningPath newLearningPath = professor.createLearningPath(id, title, description, objectives, difficultyLevel, tags);
+    public void createLearningPath(String title, String description, LinkedList<String> objectives, int difficultyLevel, LinkedList<String> tags, Professor professor) {
+        LearningPath newLearningPath = professor.createLearningPath(title, description, objectives, difficultyLevel, tags);
         learningPathHashMap.put(newLearningPath.getId(), newLearningPath);
     }
 
@@ -222,6 +218,6 @@ public class ProfessorController extends Controller {
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
-    
-    
+
+
 }

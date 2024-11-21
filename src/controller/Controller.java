@@ -8,10 +8,10 @@ import java.util.HashMap;
 
 public class Controller {
 
-    protected HashMap<String, User> userHashMap;
-    protected HashMap<String, LearningPath> learningPathHashMap;
-    protected HashMap<String, Activity> activityHashMap;
-    protected User currentUser;
+    public HashMap<String, User> userHashMap;
+    public HashMap<String, LearningPath> learningPathHashMap;
+    public HashMap<String, Activity> activityHashMap;
+    public User currentUser;
 
     /**
      * Default constructor initializing the hash maps and setting the current user to null.
@@ -40,6 +40,38 @@ public class Controller {
 
     // Query methods
 
+    public HashMap<String, User> getUserHashMap() {
+        return userHashMap;
+    }
+
+    public void setUserHashMap(HashMap<String, User> userHashMap) {
+        this.userHashMap = userHashMap;
+    }
+
+    public HashMap<String, LearningPath> getLearningPathHashMap() {
+        return learningPathHashMap;
+    }
+
+    public void setLearningPathHashMap(HashMap<String, LearningPath> learningPathHashMap) {
+        this.learningPathHashMap = learningPathHashMap;
+    }
+
+    public HashMap<String, Activity> getActivityHashMap() {
+        return activityHashMap;
+    }
+
+    public void setActivityHashMap(HashMap<String, Activity> activityHashMap) {
+        this.activityHashMap = activityHashMap;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
     /**
      * Retrieves a learning path by its ID.
      *
@@ -67,12 +99,12 @@ public class Controller {
      *
      * @param username The username of the user.
      * @param password The password of the user.
-     * @param role The role of the user (e.g., "Student" or "Professor").
+     * @param role The role of the user (e.g., "STUDENT" or "PROFESSOR").
      */
     public void registerUser(String username, String password, String role) {
-        if (role.equals("Student")) {
+        if (role.equals("STUDENT")) {
             registerStudent(username, password);
-        } else if (role.equals("Professor")) {
+        } else if (role.equals("PROFESSOR")) {
             registerProfessor(username, password);
         }
     }
@@ -114,25 +146,15 @@ public class Controller {
         if (userHashMap.containsKey(username)) {
             User user = userHashMap.get(username);
             if (user.authenticate(password)) {
-                if (user.getRole().equals("Student")) {
-                    StudentController newInstance = new StudentController(this.userHashMap, this.learningPathHashMap, this.activityHashMap, (Student) user);
+                if (user.getRole().equals("STUDENT")) {
+                    StudentController newInstance = new StudentController(this.userHashMap, this.learningPathHashMap, this.activityHashMap,(Student) user);
                     return newInstance;
-                } else if (user.getRole().equals("Professor")) {
-                    ProfessorController newInstance = new ProfessorController(this.userHashMap, this.learningPathHashMap, this.activityHashMap, (Professor) user);
+                } else if (user.getRole().equals("PROFESSOR")) {
+                    ProfessorController newInstance = new ProfessorController(this.userHashMap, this.learningPathHashMap, this.activityHashMap,(Professor) user);
                     return newInstance;
                 }
             }
         }
         return null;
-    }
-
-    /**
-     * Logs out the current user.
-     *
-     * @return A new instance of the Controller with the current user set to null.
-     */
-    public Controller logout() {
-        Controller newInstance = new Controller(this.userHashMap, this.learningPathHashMap, this.activityHashMap, null);
-        return newInstance;
     }
 }

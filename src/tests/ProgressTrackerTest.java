@@ -29,7 +29,7 @@ public class ProgressTrackerTest {
 			activities.add(new QuizActivity("Uso de bucles while " + i, "Explorar bucles while " + i, "Uso de bucles while para repetir acciones. " + i, 30, true, new LinkedList<>(), 70.0));
 		    }
 		String learningPathId = generator.generateId("LearningPath");
-		LearningPath learningPath = new LearningPath(learningPathId, "Nivel de Python 3", "Descripcion...", new LinkedList<>(), 2, new LinkedList<>(), null);
+		LearningPath learningPath = new LearningPath("Nivel de Python 3", "Descripcion...", new LinkedList<>(), 2, new LinkedList<>(), null);
 		learningPath.getActivities().addAll(activities);
 		
 		progressTracker = new ProgressTracker("Estudiante1", learningPath);

@@ -19,7 +19,7 @@ public class Student extends User implements Serializable {
 	private LinkedList<String> interests;
     private LinkedList<ProgressTracker> progressTrackers;
     private LearningPath learningPathStudent;
-    public final static String ROLE = "student";
+    public final static String ROLE = "STUDENT";
     private HashMap<LearningPath, String> resenas = new HashMap<>();
     private StudentConsola viewStudent;
     public static HashMap<String, LearningPath> mapaLearningPaths = new HashMap<>();;
