@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
 import learningpath.activity.Activity;
+import learningpath.activity.TaskActivity;
 import tracker.ProgressTracker;
 import users.Professor;
 
@@ -25,7 +26,7 @@ public class LearningPathTest {
         LinkedList<String> tags = new LinkedList<>();
         tags.add("Tag 1");
         learningPath = new LearningPath("Title", "Description", objectives, 3, tags, professor);
-        activity = new Activity("Activity Title", "Activity Description", "Activity Objective", 2, true) {};
+        this.activity = new TaskActivity("Activity Title", "Activity Description", "Activity Objective", 2, true, "");
         progressTracker = new ProgressTracker("Student1", learningPath);
     }
 
@@ -39,7 +40,7 @@ public class LearningPathTest {
     @Test
     public void testAddActivityInPos() {
         learningPath.addActivity(activity);
-        Activity newActivity = new Activity("New Activity", "New Description", "New Objective", 3, false) {};
+        Activity newActivity = new TaskActivity ("New Activity", "New Description", "New Objective", 3, false, "");
         learningPath.addActivityInPos(newActivity, 0);
         assertEquals(2, learningPath.getActivities().size());
         assertEquals(newActivity, learningPath.getActivities().get(0));
@@ -48,7 +49,7 @@ public class LearningPathTest {
     @Test
     public void testMoveActivity() {
         learningPath.addActivity(activity);
-        Activity newActivity = new Activity("New Activity", "New Description", "New Objective", 3, false) {};
+        Activity newActivity = new TaskActivity("New Activity", "New Description", "New Objective", 3, false, "");
         learningPath.addActivity(newActivity);
         learningPath.moveActivity(0, 1);
         assertEquals(newActivity, learningPath.getActivities().get(0));
