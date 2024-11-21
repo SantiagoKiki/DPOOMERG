@@ -1,6 +1,7 @@
 package learningpath.activity;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import learningpath.question.OpenQuestion;
 import learningpath.question.MultipleOptionQuestion;
@@ -21,6 +22,7 @@ public class ExamActivity extends Activity {
 		this.openQuestions = openQuestions != null ? openQuestions : new LinkedList<>();
 		this.MOQuestions = MOQuestions != null ? MOQuestions : new LinkedList<>();
 	}
+
 	public LinkedList<OpenQuestion> getOpenQuestions() {
 		return openQuestions;
 	}
@@ -55,7 +57,7 @@ public class ExamActivity extends Activity {
 		if (this.containsMOQuestion(q)) {
 			throw new IllegalArgumentException("Question already added.");
 		}
-		
+
 		this.MOQuestions.add(q);
 	}
 
@@ -90,7 +92,6 @@ public class ExamActivity extends Activity {
 		return this.MOQuestions.contains(q);
 	}
 
-
 	public double rateMultipleOption(int questionRate) {
 		double score = 0.0;
 		if (MOQuestions.isEmpty()) {
@@ -100,5 +101,33 @@ public class ExamActivity extends Activity {
 			score += q.rate(questionRate);
 		}
 		return score / MOQuestions.size();
+	}
+
+	public void doActivity() {
+		System.out.println("Exam Activity: " + this.title);
+		System.out.println("Description: " + this.description);
+		System.out.println("Objective: " + this.objective);
+		System.out.println("Expected Duration: " + this.expectedDuration);
+		System.out.println("Mandatory: " + this.mandatory);
+		System.out.println("Questions: ");
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Doing Exam Activity");
+			for (OpenQuestion q : openQuestions) {
+				System.out.println(q.getText());
+				System.out.println("Answer: ");
+				String answer = scanner.nextLine();
+				q.setAnswer(answer);
+			}
+			for (MultipleOptionQuestion q : MOQuestions) {
+				System.out.println(q.getQuestion());
+				q.showOptions();
+				String answer = scanner.nextLine();
+				q.setAnswer(answer);
+			}
+
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 }

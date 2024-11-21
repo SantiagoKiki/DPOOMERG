@@ -1,8 +1,10 @@
 package learningpath.activity;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import learningpath.question.MultipleOptionQuestion;
+import learningpath.question.Option;
 
 public class QuizActivity extends Activity {
 
@@ -71,5 +73,27 @@ public class QuizActivity extends Activity {
 			score += question.rate(questionRate);
 		}
 		return score / questions.size();
+	}
+	
+	public void doActivity() {
+		System.out.println("Quiz Activity: " + this.title);
+		System.out.println("Description: " + this.description);
+		System.out.println("Objective: " + this.objective);
+		System.out.println("Expected Duration: " + this.expectedDuration);
+		System.out.println("Mandatory: " + this.mandatory);
+		System.out.println("Minimum Score: " + this.minScore);
+		System.out.println("Questions: ");
+		try (Scanner scanner = new Scanner(System.in)) {
+			for (MultipleOptionQuestion question : questions) {
+			    System.out.println(question.getQuestion());
+			    question.showOptions();
+			    System.out.println("Answer: ");
+			    String answer = scanner.nextLine();
+			    question.setAnswer(answer);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 }

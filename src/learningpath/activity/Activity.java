@@ -2,6 +2,8 @@ package learningpath.activity;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.Scanner;
+
 import tracker.ActivityTracker;
 import utils.Generator;
 
@@ -117,5 +119,7 @@ public abstract class Activity implements Serializable{
     public void removeFollowUp(int index) {
         this.followUpActivities.remove(index);
     }
+    
+    public abstract void doActivity();
 
 }
