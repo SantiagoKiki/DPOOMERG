@@ -57,6 +57,7 @@ public class StudentConsola implements Serializable {
 		while (true) {
 			String opcion = getInput("\nSelecciona una opción: ").trim();
 			switch (opcion) {
+				persistir.cargar();
 				case "1":
 					System.out.println("Los siguientes learning Paths estan disponibles: \n");
 					System.out.println("Si esta interesad@ en alguno de ellos guarde el id ya que a través de el se podra ingresar: \n");
