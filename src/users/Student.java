@@ -75,12 +75,13 @@ public class Student extends User implements Serializable {
         }
     }
     
-    public void addResena() {
-        	try (Scanner teclado = new Scanner(System.in)) {
-				String rese = teclado.next();
-				System.out.println("Ingrese la resena:");
-				resenas.put(learningPathStudent, rese);
-			}
+    public void addResena(LearningPath learningPath, String reseña) {
+        if (learningPath != null && reseña != null && !reseña.trim().isEmpty()) {
+            resenas.put(learningPath, reseña);
+            System.out.println("Reseña agregada exitosamente para el Learning Path: " + learningPath.getTitle());
+        } else {
+            System.out.println("Datos inválidos. Asegúrate de seleccionar un Learning Path y escribir una reseña válida.");
+        }
     }
     
     public void enrollInLearningPath(LearningPath learningPath) {
