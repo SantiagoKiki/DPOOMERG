@@ -40,7 +40,6 @@ public class LearningPath implements Serializable {
 	/**
 	 * Constructor to initialize a LearningPath object with the given parameters.
 	 *
-	 * @param id              The unique identifier of the learning path.
 	 * @param title           Title of the learning path.
 	 * @param description     Description of the learning path.
 	 * @param objectives      Objectives of the learning path.
@@ -48,7 +47,7 @@ public class LearningPath implements Serializable {
 	 * @param tags            Tags associated with the learning path.
 	 * @param professor       Professor associated with the learning path.
 	 */
-	public LearningPath(String id, String title, String description, LinkedList<String> objectives, int difficultyLevel,
+	public LearningPath(String title, String description, LinkedList<String> objectives, int difficultyLevel,
 			LinkedList<String> tags, Professor professor) {
 		Generator u = Generator.getInstance();
 		this.id = u.generateId("LearningPath");

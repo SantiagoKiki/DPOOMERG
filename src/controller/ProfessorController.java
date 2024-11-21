@@ -11,7 +11,7 @@ import users.User;
 
 public class ProfessorController extends Controller {
 
-    private Professor professor;
+    private final Professor professor;
     private LearningPath currentLearningPath;
     private Activity currentActivity;
 
@@ -42,15 +42,12 @@ public class ProfessorController extends Controller {
         return professor.getCreatedLearningPaths();
     }
 
-    /**
-     * Retrieves a learning path by its index from a professor's learning paths.
-     *
-     * @param index The index of the learning path.
-     * @return The learning path at the specified index.
-     */
-    public LearningPath getProfessorLearningPathByIndex(int index) {
-        currentLearningPath = professor.getLearningPathByIndex(index);
-        return currentLearningPath;
+    public void setCurrentLearningPath(LearningPath learningPath) {
+        currentLearningPath = learningPath;
+    }
+
+    public void setCurrentActivity(Activity activity) {
+        currentActivity = activity;
     }
 
     /**
@@ -61,12 +58,6 @@ public class ProfessorController extends Controller {
     public Collection<LearningPath> getGlobalLearningPaths() {
         return learningPathHashMap.values();
     }
-
-    public LearningPath getLearningPathById(String id) {
-        currentLearningPath = learningPathHashMap.get(id);
-        return currentLearningPath;
-    }
-
     /**
      * Retrieves the activities associated with a professor.
      *
@@ -74,16 +65,6 @@ public class ProfessorController extends Controller {
      */
     public LinkedList<Activity> getProfessorActivities() {
         return professor.getCreatedActivities();
-    }
-
-    public Activity getProfessorActivityByIndex(int index) {
-        currentActivity = professor.getCreatedActivityByIndex(index);
-        return currentActivity;
-    }
-
-    public Activity getActivityInLearningPathByIndex(int index) {
-        currentActivity = currentLearningPath.getActivityByIndex(index);
-        return currentActivity;
     }
 
     /**
@@ -95,16 +76,10 @@ public class ProfessorController extends Controller {
         return activityHashMap.values();
     }
 
-    public Activity getActivityById(String id) {
-        currentActivity = activityHashMap.get(id);
-        return currentActivity;
-    }
-
     // Learning path management methods
     /**
      * Creates a new learning path and adds it to the hash map.
      *
-     * @param id The ID of the new learning path.
      * @param title The title of the new learning path.
      * @param description The description of the new learning path.
      * @param objectives The objectives of the new learning path.
@@ -112,8 +87,8 @@ public class ProfessorController extends Controller {
      * @param tags The tags associated with the new learning path.
      * @param professor The professor creating the new learning path.
      */
-    public void createLearningPath(String id, String title, String description, LinkedList<String> objectives, int difficultyLevel, LinkedList<String> tags, Professor professor) {
-        LearningPath newLearningPath = professor.createLearningPath(id, title, description, objectives, difficultyLevel, tags);
+    public void createLearningPath(String title, String description, LinkedList<String> objectives, int difficultyLevel, LinkedList<String> tags, Professor professor) {
+        LearningPath newLearningPath = professor.createLearningPath(title, description, objectives, difficultyLevel, tags);
         learningPathHashMap.put(newLearningPath.getId(), newLearningPath);
     }
 
@@ -179,10 +154,10 @@ public class ProfessorController extends Controller {
         activityHashMap.put(newActivity.getId(), newActivity);
     }
     
-    public void createTrueFalseActivity(String title, String description, String objective, int expectedDuration, boolean mandatory, LinkedList<TrueFalseQuestion> questions) {
+    /*public void createTrueFalseActivity(String title, String description, String objective, int expectedDuration, boolean mandatory, LinkedList<TrueFalseQuestion> questions) {
     	Activity newActivity = professor.createTrueFalseActivity(title, description, objective, expectedDuration, mandatory, questions);
     	activityHashMap.put(newActivity.getId(), newActivity);
-    }
+    }*/
 
     public void editCurrentActivityTitle(String title) {
         professor.editActivityTitle(currentActivity, title);
@@ -214,6 +189,10 @@ public class ProfessorController extends Controller {
 
     public void removeCurrentActivityFollowUpActivityByIndex(int index) {
         professor.removeFollowUpActivityFromActivityByIndex(currentActivity, index);
+    }
+
+    public Professor getProfessor() {
+        return professor;
     }
 
 }
