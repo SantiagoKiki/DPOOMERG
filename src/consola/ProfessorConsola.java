@@ -9,10 +9,11 @@ import learningpath.question.OpenQuestion;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class ProfessorConsola {
+public class ProfessorConsola implements Serializable {
 
     private final ProfessorController professorController;
     private final Scanner scanner;
+    public CentralPersistencia persistir;
 
     public ProfessorConsola(ProfessorController professorController) {
         this.professorController = professorController;
@@ -33,7 +34,7 @@ public class ProfessorConsola {
             System.out.print("Choose an option: ");
             int choice = getIntInput();
             scanner.nextLine(); // Consume newline
-
+            persistir.cargar();
             switch (choice) {
                 case 1:
                     viewProfessorLearningPaths();
