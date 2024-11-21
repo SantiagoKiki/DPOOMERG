@@ -31,4 +31,43 @@ public class MultipleOptionQuestion implements Serializable {
 	public void setOptions(LinkedList<Option> options) {
 		this.options = options;
 	}
+
+	public void addOption(Option option) throws NullPointerException, IllegalArgumentException {
+		if (option == null) {
+			throw new NullPointerException("Option can not be null.");
+		}
+		if (this.containsOption(option)) {
+			throw new IllegalArgumentException("Option already added.");
+		}
+
+		this.options.add(option);
+	}
+
+	public void removeOption(Option option) throws NullPointerException, IllegalArgumentException {
+		if (option == null) {
+			throw new NullPointerException("Option can not be null.");
+		}
+		if (!this.containsOption(option)) {
+			throw new IllegalArgumentException("Option not found.");
+		}
+
+		this.options.remove(option);
+	}
+
+	public boolean containsOption(Option option) {
+		return this.options.contains(option);
+	}
+
+	public double rate(int questionRate) {
+		double rate = 0;
+		if (options.isEmpty()) {
+			return rate;
+		}
+		for (Option option : options) {
+			if (option.isCorrect()) {
+				rate += questionRate;
+			}
+		}
+		return rate / options.size();
+	}
 }

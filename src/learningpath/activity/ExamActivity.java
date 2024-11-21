@@ -21,12 +21,11 @@ public class ExamActivity extends Activity {
 		this.openQuestions = openQuestions != null ? openQuestions : new LinkedList<>();
 		this.MOQuestions = MOQuestions != null ? MOQuestions : new LinkedList<>();
 	}
-
 	public LinkedList<OpenQuestion> getOpenQuestions() {
 		return openQuestions;
 	}
 
-	public LinkedList<MultipleOptionQuestion> getMOQuestion() {
+	public LinkedList<MultipleOptionQuestion> getMOQuestions() {
 		return MOQuestions;
 	}
 
@@ -38,49 +37,49 @@ public class ExamActivity extends Activity {
 		this.openQuestions = openQuestions;
 	}
 
-	public boolean addOpenQuestion(OpenQuestion question) {
+	public void addOpenQuestion(OpenQuestion question) throws NullPointerException, IllegalArgumentException {
 		if (question == null) {
-			System.err.println("Question can not be null.");
+			throw new NullPointerException("Question can not be null.");
 		}
 		if (this.containsOpenQuestion(question)) {
-			System.out.println("Question already added.");
-			return false;
+			throw new IllegalArgumentException("Question already added.");
 		}
 
 		this.openQuestions.add(question);
-		return true;
 	}
 
-	public boolean addMOQuestion(MultipleOptionQuestion q) {
+	public void addMOQuestion(MultipleOptionQuestion q) throws NullPointerException, IllegalArgumentException {
 		if (q == null) {
-			System.err.println("Question can not be null.");
+			throw new NullPointerException("Question can not be null.");
 		}
 		if (this.containsMOQuestion(q)) {
-			System.out.println("Question already added.");
-			return false;
+			throw new IllegalArgumentException("Question already added.");
 		}
-
 		
 		this.MOQuestions.add(q);
-		return true;
 	}
 
-	public boolean removeOpenQuestion(OpenQuestion question) {
-		if (question != null && this.containsOpenQuestion(question)) {
-			this.openQuestions.remove(question);
-			return true;
+	public void removeOpenQuestion(OpenQuestion question) throws IllegalArgumentException {
+
+		if (question == null) {
+			throw new NullPointerException("Question can not be null.");
 		}
-		System.out.println("There's no question like that.");
-		return false;
+		if (!this.containsOpenQuestion(question)) {
+			throw new IllegalArgumentException("Question not found.");
+		}
+		this.openQuestions.remove(question);
 	}
 
-	public boolean removeMOQuestion(MultipleOptionQuestion q) {
-		if (q != null && this.containsMOQuestion(q)) {
-			this.MOQuestions.remove(q);
-			return true;
+	public void removeMOQuestion(MultipleOptionQuestion question) throws IllegalArgumentException {
+		if (question == null) {
+			throw new NullPointerException("Question can not be null.");
 		}
-		System.out.println("There's no question like that.");
-		return false;
+
+		if (!this.containsMOQuestion(question)) {
+			throw new IllegalArgumentException("Question not found.");
+		}
+
+		this.MOQuestions.remove(question);
 	}
 
 	public boolean containsOpenQuestion(OpenQuestion question) {
@@ -89,5 +88,17 @@ public class ExamActivity extends Activity {
 
 	public boolean containsMOQuestion(MultipleOptionQuestion q) {
 		return this.MOQuestions.contains(q);
+	}
+
+
+	public double rateMultipleOption(int questionRate) {
+		double score = 0.0;
+		if (MOQuestions.isEmpty()) {
+			return 0.0;
+		}
+		for (MultipleOptionQuestion q : MOQuestions) {
+			score += q.rate(questionRate);
+		}
+		return score / MOQuestions.size();
 	}
 }

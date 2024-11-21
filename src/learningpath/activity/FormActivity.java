@@ -26,29 +26,25 @@ public class FormActivity extends Activity {
 		this.questions = questions;
 	}
 
-	public boolean addQuestion(OpenQuestion question) {
+	public void addQuestion(OpenQuestion question) throws NullPointerException, IllegalArgumentException{
 		if (question == null) {
-			System.err.println("Question can not be null.");
+			throw new NullPointerException("Question can not be null.");
 		}
 		if (this.containsQuestion(question)) {
-			System.out.println("Question already added.");
-			return false;
+			throw new IllegalArgumentException("Question already added.");
 		}
 		
 		this.questions.add(question);
-		return true;
 	}
 
-	public boolean removeQuestion(OpenQuestion question) {
+	public void removeQuestion(OpenQuestion question) throws NullPointerException, IllegalArgumentException {
 		if (question == null) {
-			System.err.println("Question can not be null.");
+			throw new NullPointerException("Question cannot be null.");
 		}
 		if (!this.containsQuestion(question)) {
-			System.err.println("There's no question like that.");
-			return false;
+			throw new IllegalArgumentException("There's no question like that.");
 		}
 		this.questions.remove(question);
-		return true;
 	}
 
 	public boolean containsQuestion(OpenQuestion question) {
