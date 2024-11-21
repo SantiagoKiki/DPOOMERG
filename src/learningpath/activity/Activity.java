@@ -35,7 +35,7 @@ public abstract class Activity implements Serializable{
         this.prerequisites = new LinkedList<>();
         this.followUpActivities = new LinkedList<>();
     }
-
+    
     public String getId() {
         return this.id;
     }

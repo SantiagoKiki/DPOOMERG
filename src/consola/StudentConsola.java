@@ -53,11 +53,11 @@ public class StudentConsola implements Serializable {
         System.out.println("5. Calificar una actividad \n");
         System.out.println("6. Consultar progreso en un Learning Path \n");
         System.out.println("0. Cerrar sesión \n");
+		persistir.cargar();
 
 		while (true) {
 			String opcion = getInput("\nSelecciona una opción: ").trim();
 			switch (opcion) {
-				persistir.cargar();
 				case "1":
 					System.out.println("Los siguientes learning Paths estan disponibles: \n");
 					System.out.println("Si esta interesad@ en alguno de ellos guarde el id ya que a través de el se podra ingresar: \n");

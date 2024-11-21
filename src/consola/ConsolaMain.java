@@ -5,6 +5,7 @@ import controller.ProfessorController;
 import controller.StudentController;
 import java.util.Scanner;
 
+
 /**
  * The main class for the console application.
  */

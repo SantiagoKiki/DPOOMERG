@@ -5,7 +5,9 @@ import learningpath.LearningPath;
 import learningpath.activity.Activity;
 import learningpath.question.MultipleOptionQuestion;
 import learningpath.question.OpenQuestion;
+import persistencia.CentralPersistencia;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Scanner;
 
