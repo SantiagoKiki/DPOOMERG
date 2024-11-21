@@ -1,6 +1,7 @@
 package learningpath.activity;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import learningpath.question.OpenQuestion;
 
@@ -49,6 +50,25 @@ public class FormActivity extends Activity {
 
 	public boolean containsQuestion(OpenQuestion question) {
 		return this.questions.contains(question);
+	}
+	
+	public void doActivity() {
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Form Activity: " + this.title);
+			System.out.println("Description: " + this.description);
+			System.out.println("Objective: " + this.objective);
+			System.out.println("Expected Duration: " + this.expectedDuration);
+			System.out.println("Mandatory: " + this.mandatory);
+			System.out.println("Questions: ");
+			for (OpenQuestion q : this.questions) {
+				System.out.println(q.getText());
+				String answer = scanner.nextLine();
+				q.setAnswer(answer);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 }

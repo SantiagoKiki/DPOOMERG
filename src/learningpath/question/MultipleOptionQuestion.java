@@ -9,10 +9,12 @@ public class MultipleOptionQuestion implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String question;
+	private String answer;
 	private LinkedList<Option> options;
 
 	public MultipleOptionQuestion(String question, LinkedList<Option> options) {
 		this.question = question;
+		this.answer = "";
 		this.options = options != null ? options : new LinkedList<>();
 	}
 
@@ -22,6 +24,14 @@ public class MultipleOptionQuestion implements Serializable {
 
 	public void setQuestion(String question) {
 		this.question = question;
+	}
+	
+	public String getAnswer() {
+		return answer;
+	}
+	
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 
 	public LinkedList<Option> getOptions() {
@@ -56,6 +66,12 @@ public class MultipleOptionQuestion implements Serializable {
 
 	public boolean containsOption(Option option) {
 		return this.options.contains(option);
+	}
+	
+	public void showOptions() {
+        for (Option option : options) {
+            System.out.println(option.getText());
+        }
 	}
 
 	public double rate(int questionRate) {

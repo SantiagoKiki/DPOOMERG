@@ -3,6 +3,8 @@ package learningpath.activity;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.Scanner;
+
 import learningpath.question.TrueFalseQuestion;
 
 public class TrueFalseActivity extends Activity implements Serializable {
@@ -51,6 +53,28 @@ public class TrueFalseActivity extends Activity implements Serializable {
 	
 	public boolean containsQuestion(TrueFalseQuestion question) {
 		return questions.contains(question);
+	}
+	
+	public void doActivity() {
+		System.out.println("True / False Activity: " + this.title);
+		System.out.println("Description: " + this.description);
+		System.out.println("Objective: " + this.objective);
+		System.out.println("Expected Duration: " + this.expectedDuration);
+		System.out.println("Mandatory: " + this.mandatory);
+		System.out.println("Questions: ");
+		try (Scanner scanner = new Scanner(System.in)) {
+			for (TrueFalseQuestion q : questions) {
+			    System.out.println(q.getQuestion());
+			    q.showOptions();
+			    System.out.println("Answer: ");
+			    String answer = scanner.nextLine();
+			    q.setAnswer(answer);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}
+		
 	}
 
 }
