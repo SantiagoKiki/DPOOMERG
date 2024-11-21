@@ -28,7 +28,7 @@ public class ProfessorTest {
 	        LinkedList<String> tags = new LinkedList<>();
 	        tags.add("Programming");
 
-	        learningPath = professor.createLearningPath("101", "Intro to Programming", "Learn programming basics", objectives, 1, tags);
+	        learningPath = professor.createLearningPath("Intro to Programming", "Learn programming basics", objectives, 1, tags);
 	    }
 
 	    @Test

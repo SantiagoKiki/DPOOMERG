@@ -39,8 +39,9 @@ public class ConsolaMain {
                             consola.start();
                             controller = new Controller(controller.getUserHashMap(), controller.getLearningPathHashMap(), controller.getActivityHashMap(), null);
                         } else if (controller instanceof StudentController) {
-                            System.out.println("Logged in as Student.");
-                            // Handle student console
+                            StudentConsola consola = new StudentConsola((StudentController) controller);
+                            consola.start();
+                            controller = new Controller(controller.getUserHashMap(), controller.getLearningPathHashMap(), controller.getActivityHashMap(), null);
                         }
                     }
                     break;

@@ -18,7 +18,7 @@ class StudentTest {
     @BeforeEach
     public void setUp() {
         student = new Student("testuser", "password");
-        learningPath = new LearningPath("1", "Programming Basics", "Intro to Programming", new LinkedList<>(), 5, new LinkedList<>(), null);
+        learningPath = new LearningPath("Programming Basics", "Intro to Programming", new LinkedList<>(), 5, new LinkedList<>(), null);
     }
 
     @Test
