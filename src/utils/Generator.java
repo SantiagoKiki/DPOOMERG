@@ -1,101 +1,82 @@
 package utils;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+import persistencia.CentralPersistencia;
 
-public class Generator {
+public class Generator implements Serializable {
 
-	private static Generator instance = null;
-	private final HashMap<String, LinkedList<String>> db = new HashMap<>();
+    private static final long serialVersionUID = 1L;
 
-	private Generator() {
-		db.put("Activity", new LinkedList<>());
-		db.put("LearningPath", new LinkedList<>());
-	}
-	
-	public static Generator getInstance() {
-		if (instance == null) {
-			instance = new Generator();
-		}
-		return instance;
-	}
-	
-	public static void deleteInstance() {
-		instance = null;
-	}
+    private static Generator instance = null;
+    public transient static CentralPersistencia centralPersistencia = new CentralPersistencia();
 
-	private String nanoid(String input) {
-		int length = input.length();
-		String san = input.replace("\\W", "");
+    private final HashMap<String, LinkedList<String>> db = new HashMap<>();
 
-		int randomLength = Math.max(0, length - san.length());
-		StringBuilder randomP = new StringBuilder();
-		Random rand = new Random();
+    private Generator() {
+        db.put("Activity", new LinkedList<>());
+        db.put("LearningPath", new LinkedList<>());
+    }
+    
+    public static synchronized Generator getInstance() {
+        if (instance == null) {
+            instance = new Generator();
+        }
+        return instance;
+    }
 
-		for (int i = 0; i < randomLength; i++) {
-			randomP.append((char) (rand.nextInt(36) + 'a'));
-		}
+    private String nanoid(int length) {
+        char[] characters = "abcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
+        StringBuilder result = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            result.append(characters[ThreadLocalRandom.current().nextInt(characters.length)]);
+        }
+        return result.toString();
+    }
 
-		return (san + randomP.toString()).substring(0, length);
-	}
+    private String interleave(String s1, String s2) {
+        StringBuilder result = new StringBuilder(s1.length() + s2.length());
+        int minLength = Math.min(s1.length(), s2.length());
 
-	private String interleave(String s1, String s2) {
-		StringBuilder result = new StringBuilder();
-		int i = 0;
-		int j = 0;
+        for (int i = 0; i < minLength; i++) {
+            result.append(s1.charAt(i)).append(s2.charAt(i));
+        }
 
-		while (i < s1.length() && j < s2.length()) {
-			result.append(s1.charAt(i++));
-			result.append(s2.charAt(j++));
-		}
+        if (s1.length() > minLength) {
+            result.append(s1.substring(minLength));
+        } else if (s2.length() > minLength) {
+            result.append(s2.substring(minLength));
+        }
 
-		result.append(s1.substring(i));
-		result.append(s2.substring(j));
+        return result.toString();
+    }
 
-		return result.toString();
-	}
+    private boolean existsInDatabase(String type, String id) {
+        LinkedList<String> typeList = db.get(type);
+        return typeList != null && typeList.contains(id);
+    }
 
-	private boolean existsInDatabase(String type, String id) {
-		if (type == null) {
-			System.err.println("Type can not be null");
-			return false;
-		}
+    private String checkId(String type, String id) {
+        while (existsInDatabase(type, id)) {
+            int l = type.length() + (int) Math.ceil(type.length() / 2.0);
+            id = interleave(type, nanoid(l));
+        }
+        return id;
+    }
 
-		if (id == null) {
-			System.err.println("Id can not be null");
-			return false;
-		}
-		LinkedList<String> typeList = this.db.get(type);
-		if (typeList == null) {
-			System.err.println("Invalid type \"" + type + "\"");
-			return false;
-		}
+    public synchronized String generateId(String type) {
+        int l = type.length() + (int) Math.ceil(type.length() / 2.0);
+        String id = interleave(type, nanoid(l));
+        String finalId = checkId(type, id);
 
-		return typeList.contains(id);
-	}
+        db.get(type).add(finalId);
 
-	private String checkId(String type, String id) {
-		boolean exists = this.existsInDatabase(type, id);
+        return finalId;
+    }
 
-		if (!exists) {
-			return id;
-		}
-
-		int l = type.length() + (int) Math.floor(type.length() / 2.0);
-		String newId = this.interleave(type, this.nanoid(Integer.toString(l)));
-		return checkId(type, newId);
-	}
-
-	public String generateId(String type) {
-		int l = type.length() + (int) Math.floor(type.length() / 2.0);
-		String id = interleave(type, nanoid(Integer.toString(l)));
-		String finalId = checkId(type, id);
-
-		if (!existsInDatabase(type, finalId)) {
-			db.get(type).add(finalId);
-		}
-
-		return finalId;
-	}
+    public void guardarInfo() {
+        centralPersistencia.guardar2(db);
+    }
 }

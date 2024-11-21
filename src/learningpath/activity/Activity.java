@@ -1,31 +1,39 @@
 package learningpath.activity;
 
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.Scanner;
 
+import tracker.ActivityTracker;
 import utils.Generator;
 
-public abstract class Activity {
+public abstract class Activity implements Serializable{
 
-    protected String id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected String id;
     protected String title;
     protected String description;
     protected String objective;
     protected int expectedDuration;
+    protected boolean mandatory;
+    protected LinkedList<ActivityTracker> activityTrackers;
     protected LinkedList<Activity> prerequisites;
     protected LinkedList<Activity> followUpActivities;
-
-    public Activity(String title, String description, String objective, int expectedDuration,
-                    LinkedList<Activity> prerequisites, LinkedList<Activity> followUpActivities) {
+    
+    public Activity(String title, String description, String objective, int expectedDuration, boolean mandatory) {
         Generator u = Generator.getInstance();
         this.id = u.generateId("Activity");
         this.title = title;
         this.description = description;
         this.objective = objective;
         this.expectedDuration = expectedDuration;
-        this.prerequisites = prerequisites;
-        this.followUpActivities = followUpActivities;
-        Generator.deleteInstance();
+        this.mandatory = mandatory;
+        this.activityTrackers = new LinkedList<>();
+        this.prerequisites = new LinkedList<>();
+        this.followUpActivities = new LinkedList<>();
     }
 
     public String getId() {
@@ -46,6 +54,14 @@ public abstract class Activity {
 
     public int getExpectedDuration() {
         return this.expectedDuration;
+    }
+
+    public boolean isMandatory() {
+        return this.mandatory;
+    }
+
+    public LinkedList<ActivityTracker> getActivityTrackers() {
+        return this.activityTrackers;
     }
 
     public LinkedList<Activity> getPrerequisites() {
@@ -76,19 +92,23 @@ public abstract class Activity {
         this.expectedDuration = i;
     }
 
-    public void setPrerequisites(LinkedList<Activity> p) {
-        this.prerequisites = p;
+    public void setMandatory(boolean m) {
+        this.mandatory = m;
     }
 
-    public void setFollowUpActivities(LinkedList<Activity> f) {
-        this.followUpActivities = f;
+    public void addActivityTracker(ActivityTracker activityTracker) {
+        this.activityTrackers.add(activityTracker);
+    }
+
+    public void removeActivityTrackerByIndex(int index) {
+        this.activityTrackers.remove(index);
     }
 
     public void addPrerequisite(Activity activity) {
         this.prerequisites.add(activity);
     }
 
-    public void removePrerequisite(int index) {
+    public void removePrerequisiteByIndex(int index) {
         this.prerequisites.remove(index);
     }
 
@@ -99,5 +119,7 @@ public abstract class Activity {
     public void removeFollowUp(int index) {
         this.followUpActivities.remove(index);
     }
+    
+    public abstract void doActivity();
 
 }

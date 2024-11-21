@@ -2,55 +2,85 @@ package controller;
 
 import learningpath.*;
 import learningpath.activity.*;
+import persistencia.CentralPersistencia;
 import tracker.ActivityTracker;
 import tracker.ProgressTracker;
 import users.*;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class StudentController extends Controller {
-
-    Student student;
-
-    public StudentController(HashMap<String, User> userHashMap, HashMap<Integer, LearningPath> learningPathHashMap, HashMap<Integer, Activity> activityHashMap, User currentUser) {
-        super(userHashMap, learningPathHashMap, activityHashMap, currentUser);
-        student = (Student) currentUser;
-    }
-
-    // Student management methods
+public class StudentController extends Controller implements Serializable{
 
     /**
-     * Enrolls a student in a learning path.
-     * @param learningPath The learning path in which the student is to be enrolled.
-     */
-    public void enrollInLearningPath(LearningPath learningPath) {
-        student.enrollInLearningPath(learningPath);
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static ArrayList<Student> arrayStudents = new ArrayList<Student>();
+    private LearningPath currentLearningPath;
+    private ProgressTracker currentProgressTracker;
+    private ActivityTracker currentActivityTracker;
+    private LinkedList<LearningPath> learningPathsByInterest;
+    private Student student;
+    private CentralPersistencia centralPersistencia;
+
+    public StudentController(HashMap<String, User> userHashMap, HashMap<String, LearningPath> learningPathHashMap, HashMap<String, Activity> activityHashMap, Student currentUser) {
+        super(userHashMap, learningPathHashMap, activityHashMap, currentUser);
+        student = currentUser;
+
     }
 
-    public LinkedList<LearningPath> getLearningPathsByInterest(String interest) {
+	public LinkedList<LearningPath> getLearningPathsByInterest(String interest) {
 
         LinkedList<LearningPath> learningPaths = new LinkedList<>();
 
         for(LearningPath learningPath : learningPathHashMap.values()) {
 
-            LinkedList tags = learningPath.getTags();
+            LinkedList<String> tags = learningPath.getTags();
             if(tags.contains(interest)) {
                 learningPaths.add(learningPath);
             }
         }
+        learningPathsByInterest = learningPaths;
         return learningPaths;
     }
+
+    public LearningPath getLearningPathByInterest(int index) {
+        currentLearningPath = learningPathsByInterest.get(index);
+        return currentLearningPath;
+    }
+
+    public Collection<LearningPath> getGlobalLearningPaths() {
+        return learningPathHashMap.values();
+    }
+
+    public LearningPath getLearningPathById(String id) {
+        currentLearningPath = learningPathHashMap.get(id);
+        return currentLearningPath;
+    }
+
+    // Enrolling management method
+
+    /**
+     * Enrolls a student in a learning path.
+     */
+    public void enrollInLearningPath() {
+        student.enrollInLearningPath(currentLearningPath);
+    }
+
 
     // Progress tracker management methods
 
     /**
      * Retrieves the progress trackers associated with a student.
      *
-     * @param student The student whose progress trackers are to be retrieved.
      * @return A linked list of progress trackers associated with the student.
      */
-    public LinkedList<ProgressTracker> getStudentProgressTrackers(Student student) {
+    public LinkedList<ProgressTracker> getStudentProgressTrackers() {
         return student.getProgressTrackers();
     }
 
@@ -60,28 +90,27 @@ public class StudentController extends Controller {
      * @return A linked list of progress trackers associated with the student.
      */
     public ProgressTracker getStudentProgressTrackerByIndex(int index) {
-        return student.getProgressTrackerByIndex(index);
+        currentProgressTracker = student.getProgressTrackerByIndex(index);
+        return currentProgressTracker;
     }
 
     /**
      * Retrieves the activity trackers associated with a progress tracker.
      *
-     * @param progressTracker The progress tracker whose activity trackers are to be retrieved.
      * @return A linked list of activity trackers associated with the progress tracker.
      */
-    public LinkedList<ActivityTracker> getActivityTrackers(ProgressTracker progressTracker) {
-        return progressTracker.getActivityTrackers();
+    public LinkedList<ActivityTracker> getActivityTrackers() {
+        return currentProgressTracker.getActivityTrackers();
     }
 
     /**
      * Retrieves an activity tracker by its index from a progress tracker's activity trackers.
      *
-     * @param progressTracker The progress tracker whose activity tracker is to be retrieved.
      * @param index The index of the activity tracker.
      * @return The activity tracker at the specified index.
      */
-    public ActivityTracker getActivityTrackerByIndex(ProgressTracker progressTracker, int index) {
-        return progressTracker.getActivityTrackerByIndex(index);
+    public ActivityTracker getActivityTrackerByIndex(int index) {
+        return currentProgressTracker.getActivityTrackerByIndex(index);
     }
 
     // Activity tracker management methods
@@ -89,31 +118,91 @@ public class StudentController extends Controller {
     /**
      * Retrieves the activity associated with an activity tracker.
      *
-     * @param activityTracker The activity tracker whose activity is to be retrieved.
      * @return The activity associated with the activity tracker.
      */
-    public Activity getActivity(ActivityTracker activityTracker) {
-        return activityTracker.getActivity();
+    public Activity getActivity() {
+        return currentActivityTracker.getActivity();
     }
 
     /**
      * Retrieves the status of an activity tracker.
      *
-     * @param activityTracker The activity tracker whose status is to be retrieved.
      * @return The status of the activity tracker.
      */
-    public String getActivityStatus(ActivityTracker activityTracker) {
-        return activityTracker.getStatus();
+    public String getActivityStatus() {
+        return currentActivityTracker.getCompletionStatus();
     }
 
     /**
      * Records the completion of an activity.
-     *
-     * @param activityTracker The activity tracker whose activity is to be marked as completed.
      */
-    public void recordActivityCompletion(ActivityTracker activityTracker) {
-        activityTracker.setStatus("Completed");
+    public void recordActivityStart() {
+        currentProgressTracker.recordActivityStart(currentActivityTracker);
     }
+
+    public void recordActivityCompletion() {
+        currentProgressTracker.recordActivityCompletion(currentActivityTracker);
+    }
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public LearningPath getCurrentLearningPath() {
+		return currentLearningPath;
+	}
+
+	public void setCurrentLearningPath(LearningPath currentLearningPath) {
+		this.currentLearningPath = currentLearningPath;
+	}
+
+	public ProgressTracker getCurrentProgressTracker() {
+		return currentProgressTracker;
+	}
+
+	public void setCurrentProgressTracker(ProgressTracker currentProgressTracker) {
+		this.currentProgressTracker = currentProgressTracker;
+	}
+
+	public ActivityTracker getCurrentActivityTracker() {
+		return currentActivityTracker;
+	}
+
+	public void setCurrentActivityTracker(ActivityTracker currentActivityTracker) {
+		this.currentActivityTracker = currentActivityTracker;
+	}
+
+	public LinkedList<LearningPath> getLearningPathsByInterest() {
+		return learningPathsByInterest;
+	}
+
+	public void setLearningPathsByInterest(LinkedList<LearningPath> learningPathsByInterest) {
+		this.learningPathsByInterest = learningPathsByInterest;
+	}
+
+	public void setCentralPersistencia(CentralPersistencia centralPersistencia) {
+		this.centralPersistencia = centralPersistencia;
+	}
+	public CentralPersistencia getCentralPersistencia() {
+		return centralPersistencia;
+	}
+
+	public boolean isStudentRegistered(String login) {
+		for(Student elements : arrayStudents)
+		{
+			if (elements.equals(login)){
+				return true;
+			}
+		}
+		return false;
+	}
+    
+    
+    
 }
 
 
