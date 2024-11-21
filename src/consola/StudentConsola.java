@@ -9,6 +9,7 @@ import learningpath.activity.Activity;
 import learningpath.activity.ResourceActivity;
 import learningpath.question.OpenQuestion;
 import persistencia.CentralPersistencia;
+import tracker.ActivityTracker;
 import tracker.ProgressTracker;
 import users.Professor;
 import users.Student;
@@ -40,102 +41,151 @@ public class StudentConsola implements Serializable {
 
 
 	public void start() {
-		arrayIntereses.add(interes);
-		arrayEtiquetas.add(tag1);
-		arrayEtiquetas.add(tag2);
-		System.out.println("\n===========================================");
-		System.out.println("Bienvenido, Estudiante!");
-        System.out.println("===========================================\n");
-        System.out.println("1. Ver Learning Paths \n");
-        System.out.println("2. Inscribir tu Learning Path \n");
-        System.out.println("3. Ver actividades de los Learnings Paths \n");
-        System.out.println("4. Generar reseña para un Learning Path \n");
-        System.out.println("5. Calificar una actividad \n");
-        System.out.println("6. Consultar progreso en un Learning Path \n");
-        System.out.println("0. Cerrar sesión \n");
+	    arrayIntereses.add(interes);
+	    arrayEtiquetas.add(tag1);
+	    arrayEtiquetas.add(tag2);
+	    System.out.println("\n===========================================");
+	    System.out.println("Bienvenido, Estudiante!");
+	    System.out.println("===========================================\n");
+	    System.out.println("1. Ver Learning Paths \n");
+	    System.out.println("2. Inscribir tu Learning Path \n");
+	    System.out.println("3. Ver actividades de los Learnings Paths \n");
+	    System.out.println("4. Generar reseña para un Learning Path \n");
+	    System.out.println("5. Calificar una actividad \n");
+	    System.out.println("6. Consultar progreso en un Learning Path \n");
+	    System.out.println("0. Cerrar sesión \n");
 
-		while (true) {
-			String opcion = getInput("\nSelecciona una opción: ").trim();
-			switch (opcion) {
-				persistir.cargar();
-				case "1":
-					System.out.println("Los siguientes learning Paths estan disponibles: \n");
-					System.out.println("Si esta interesad@ en alguno de ellos guarde el id ya que a través de el se podra ingresar: \n");
-					for (LearningPath elements : LearningPath.allLearningPath) {
-						System.out.println("Titulo: " + elements.getTitle() + " \n");
-						System.out.println("Descripción: " + elements.getDescription() + " \n");
-						System.out.println("Rating: " + elements.getRating() + " \n");
-						System.out.println("Id: " + elements.getId() + " \n");
-						System.out.println("===========================================\\n");
+	    while (true) {
+	        String opcion = getInput("\nSelecciona una opción: ").trim();
+	        switch (opcion) {
+	            case "1":
+	                System.out.println("Los siguientes learning Paths estan disponibles: \n");
+	                System.out.println("Si esta interesad@ en alguno de ellos guarde el id ya que a través de el se podrá ingresar: \n");
+	                for (LearningPath elements : LearningPath.allLearningPath) {
+	                    System.out.println("Titulo: " + elements.getTitle() + " \n");
+	                    System.out.println("Descripción: " + elements.getDescription() + " \n");
+	                    System.out.println("Rating: " + elements.getRating() + " \n");
+	                    System.out.println("Id: " + elements.getId() + " \n");
+	                    System.out.println("===========================================\\n");
+	                }
+	                break;
 
-					}
-					break;
-				case "2":
-					System.out.println("Por favor ingrese la id del LearningPath a inscribir: \n");
-					String numero = getInput("\nIngrese la id: ").trim();
-					LearningPath learningPath = studentOwn.mapaLearningPaths.get(numero);
-					studentController.setCurrentLearningPath(learningPath);
+	            case "2":
+	                System.out.println("Por favor ingrese la id del LearningPath a inscribir: \n");
+	                String numero = getInput("\nIngrese la id: ").trim();
+	                LearningPath learningPath = studentOwn.mapaLearningPaths.get(numero);
+	                studentController.setCurrentLearningPath(learningPath);
+	                break;
 
-					break;
+	            case "3":
+	                System.out.println("Ingrese la id del LearningPath a consultar: \n");
+	                String idLearningPathActividad = getInput("\nIngrese la id: ").trim();
+	                LearningPath learningPathIterable = studentOwn.mapaLearningPaths.get(idLearningPathActividad);
+	                if (learningPathIterable != null) {
+	                    System.out.println("Las siguientes son las actividades del learningPath escogido \n");
+	                    for (Activity actividadesLearningPath : learningPathIterable.getActivities()) {
+	                        System.out.println("El titulo de la actividad es:" + actividadesLearningPath.getTitle() + " \n");
+	                        System.out.println("La descripción de la actividad es:" + actividadesLearningPath.getDescription() + " \n");
+	                        System.out.println("El objetivo de la actividad es:" + actividadesLearningPath.getObjective() + " \n");
+	                        System.out.println("La id de la actividad es:" + actividadesLearningPath.getId() + " \n");
+	                        System.out.println("===========================================\\n");
+	                    }
+	                }
+	                break;
 
-				case "3":
-					System.out.println("Ingrese la id del LearningPath a consultar: \n");
-					String idLearningPathActividad = getInput("\nIngrese la id: ").trim();
-					LearningPath learningPathIterable = studentOwn.mapaLearningPaths.get(idLearningPathActividad);
-					if (learningPathIterable != null) {
-						System.out.println("Las siguientes son las actividades del learningPath escogido \n");
-						for (Activity actividadesLearningPath : learningPathIterable.getActivities()) {
-							System.out.println("El titulo de la actividad es:" + actividadesLearningPath.getTitle() + " \n");
-							System.out.println("La descripción de la actividad es:" + actividadesLearningPath.getDescription() + " \n");
-							System.out.println("El objetivo de la actividad es:" + actividadesLearningPath.getObjective() + " \n");
-							System.out.println("La id de la actividad es:" + actividadesLearningPath.getId() + " \n");
-							System.out.println("===========================================\\n");
+	            case "4":
+	                System.out.println("\n Generar Reseña para un Learning Path");
+	                if (studentOwn.mapaLearningPaths.isEmpty()) {
+	                    System.out.println("No tienes Learning Paths inscritos.");
+	                    break;
+	                }
+	                for (String id : studentOwn.mapaLearningPaths.keySet()) {
+	                    LearningPath lp = studentOwn.mapaLearningPaths.get(id);
+	                    System.out.println("ID: " + id + ", Título: " + lp.getTitle());
+	                }
+	                String idLearningPathResena = getInput("Ingrese el ID del Learning Path para el que desea generar una reseña: ").trim();
+	                LearningPath selectedPath = studentOwn.mapaLearningPaths.get(idLearningPathResena);
+	                if (selectedPath == null) {
+	                    System.out.println("El ID ingresado no corresponde a un Learning Path inscrito.");
+	                    break;
+	                }
+	                String resena = getInput("Escriba su reseña: ");
+	                studentOwn.addResena(selectedPath, resena);
+	                studentController.getCentralPersistencia().guardarStudent(studentController);
+	                System.out.println("Reseña añadida exitosamente.");
+	                break;
 
+	            case "5":
+	                System.out.println("\nCalificar una Actividad");
+	                if (studentOwn.getProgressTrackers().isEmpty()) {
+	                    System.out.println("No tienes actividades disponibles para calificar. Asegúrate de estar inscrito en un Learning Path.");
+	                    break;
+	                }
+	                System.out.println("Tus Learning Paths inscritos:");
+	                for (int i = 0; i < studentOwn.getProgressTrackers().size(); i++) {
+	                    System.out.println((i + 1) + ". " + studentOwn.getProgressTrackers().get(i).getLearningpath().getTitle());
+	                }
 
-						}
-					}
-					break;
-				case "4":
-					System.out.println("\n Generar Reseña para un Learning Path");
-					if (studentOwn.mapaLearningPaths.isEmpty()) {
-						System.out.println("No tienes Learning Paths inscritos.");
-						break;
-					}
-					for (String id : studentOwn.mapaLearningPaths.keySet()) {
-						LearningPath lp = studentOwn.mapaLearningPaths.get(id);
-						System.out.println("ID: " + id + ", Título: " + lp.getTitle());
-					}
-					String idLearningPathResena = getInput("Ingrese el ID del Learning Path para el que desea generar una reseña: ").trim();
-					LearningPath selectedPath = studentOwn.mapaLearningPaths.get(idLearningPathResena);
-					if (selectedPath == null) {
-						System.out.println("El ID ingresado no corresponde a un Learning Path inscrito.");
-						break;
-					}
-					break;
-				case "6":
-					if (studentOwn.mapaLearningPaths.isEmpty()) {
-						System.out.println("No tienes Learning Paths inscritos.");
-						break;
-					}
-					for (String id : studentOwn.mapaLearningPaths.keySet()) {
-						LearningPath lp = studentOwn.mapaLearningPaths.get(id);
-						System.out.println("ID: " + id + ", Título: " + lp.getTitle());
-					}
-					String idLearningPathProgreso = getInput("Ingrese el ID del Learning Path que desea consultar: ").trim();
-					LearningPath selectedPathProgreso = studentOwn.mapaLearningPaths.get(idLearningPathProgreso);
-					if (selectedPathProgreso == null) {
-						System.out.println("El ID ingresado no corresponde a un Learning Path inscrito.");
-						break;
-					}
-					ProgressTracker tracker = studentOwn.getProgressTrackerByLearningPath(selectedPathProgreso);
-					System.out.println("Progreso actual: " + tracker.getProgress() + "%");
-					break;
-				default:
-					System.out.println("Opcion invalida. Pruebe de nuevo.");
-					return;
-			}
-		}
+	                int trackerIndex = Integer.parseInt(getInput("\nSelecciona el número del Learning Path que deseas consultar: ").trim()) - 1;
+
+	                if (trackerIndex < 0 || trackerIndex >= studentOwn.getProgressTrackers().size()) {
+	                    System.out.println("Índice inválido.");
+	                    break;
+	                }
+	                ProgressTracker progressTracker = studentOwn.getProgressTrackers().get(trackerIndex);
+	                LinkedList<ActivityTracker> activityTrackers = progressTracker.getActivityTrackers();
+	                if (activityTrackers.isEmpty()) {
+	                    System.out.println("No hay actividades disponibles para calificar en este Learning Path.");
+	                    break;
+	                }
+	                System.out.println("\nActividades disponibles:");
+	                for (int i = 0; i < activityTrackers.size(); i++) {
+	                    System.out.println((i + 1) + ". " + activityTrackers.get(i).getActivity().getTitle());
+	                }
+	                int activityIndex = Integer.parseInt(getInput("\nSelecciona el número de la actividad que deseas calificar: ").trim()) - 1;
+	                if (activityIndex < 0 || activityIndex >= activityTrackers.size()) {
+	                    System.out.println("Índice inválido.");
+	                    break;
+	                }
+	                ActivityTracker tracker = activityTrackers.get(activityIndex);
+	                int rating = Integer.parseInt(getInput("Ingresa una calificación entre 1 y 5: ").trim());
+	                if (rating < 1 || rating > 5) {
+	                    System.out.println("La calificación debe estar entre 1 y 5.");
+	                    break;
+	                }
+	                tracker.addRating(rating);
+	                System.out.println("Has calificado la actividad " + tracker.getActivity().getTitle() + " con un " + rating);
+	                break;
+
+	            case "6":
+	                if (studentOwn.mapaLearningPaths.isEmpty()) {
+	                    System.out.println("No tienes Learning Paths inscritos.");
+	                    break;
+	                }
+	                for (String id : studentOwn.mapaLearningPaths.keySet()) {
+	                    LearningPath lp = studentOwn.mapaLearningPaths.get(id);
+	                    System.out.println("ID: " + id + ", Título: " + lp.getTitle());
+	                }
+	                String idLearningPathProgreso = getInput("Ingrese el ID del Learning Path que desea consultar: ").trim();
+	                LearningPath selectedPathProgreso = studentOwn.mapaLearningPaths.get(idLearningPathProgreso);
+	                if (selectedPathProgreso == null) {
+	                    System.out.println("El ID ingresado no corresponde a un Learning Path inscrito.");
+	                    break;
+	                }
+	                ProgressTracker tracker2 = studentOwn.getProgressTrackerByLearningPath(selectedPathProgreso);
+	                if (tracker2 == null) {
+	                    System.out.println("No se encontró un progreso asociado a este Learning Path.");
+	                    break;
+	                }
+	                System.out.println("Progreso actual del Learning Path '" + selectedPathProgreso.getTitle() + "': " + tracker2.getProgress() + "%");
+	                break;
+
+	            default:
+	                System.out.println("Opción inválida. Prueba de nuevo.");
+	        }
+	    }
 	}
+
 
 
 
