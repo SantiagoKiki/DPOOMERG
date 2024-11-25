@@ -2,13 +2,14 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import learningpath.LearningPath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
-import learningpath.activity.Activity;
-import tracker.ProgressTracker;
-import users.Professor;
+
+import logic.learningpath.LearningPath;
+import logic.learningpath.activity.Activity;
+import logic.tracker.ProgressTracker;
+import logic.users.Professor;
 
 public class LearningPathTest {
 

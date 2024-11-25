@@ -2,8 +2,8 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 
-import learningpath.question.MultipleOptionQuestion;
-import learningpath.question.Option;
+import logic.learningpath.question.MultipleOptionQuestion;
+import logic.learningpath.question.Option;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;

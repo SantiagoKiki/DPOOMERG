@@ -9,11 +9,11 @@ import java.util.LinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import learningpath.LearningPath;
-import learningpath.activity.Activity;
-import learningpath.question.MultipleOptionQuestion;
-import learningpath.question.OpenQuestion;
-import users.Professor;
+import logic.learningpath.LearningPath;
+import logic.learningpath.activity.Activity;
+import logic.learningpath.question.MultipleOptionQuestion;
+import logic.learningpath.question.OpenQuestion;
+import logic.users.Professor;
 
 public class ProfessorTest {
 	 private Professor professor;

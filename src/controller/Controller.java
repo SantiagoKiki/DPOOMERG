@@ -1,10 +1,11 @@
 package controller;
 
-import learningpath.*;
-import learningpath.activity.Activity;
-import users.*;
-
 import java.util.HashMap;
+import logic.learningpath.LearningPath;
+import logic.learningpath.activity.Activity;
+import logic.users.Professor;
+import logic.users.Student;
+import logic.users.User;
 
 public class Controller {
 

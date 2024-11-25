@@ -1,10 +1,11 @@
 package tests;
 
-import learningpath.LearningPath;
-import tracker.ActivityTracker;
-import tracker.ProgressTracker;
-import users.Student;
 import consola.StudentConsola;
+import logic.learningpath.LearningPath;
+import logic.tracker.ActivityTracker;
+import logic.tracker.ProgressTracker;
+import logic.users.Student;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

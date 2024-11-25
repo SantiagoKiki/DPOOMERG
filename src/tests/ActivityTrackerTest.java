@@ -4,9 +4,11 @@ import java.util.LinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import learningpath.activity.QuizActivity;
-import learningpath.question.MultipleOptionQuestion;
-import tracker.ActivityTracker;
+
+import logic.learningpath.activity.QuizActivity;
+import logic.learningpath.question.MultipleOptionQuestion;
+import logic.tracker.ActivityTracker;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ActivityTrackerTest {

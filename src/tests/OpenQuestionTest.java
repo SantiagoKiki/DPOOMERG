@@ -1,11 +1,12 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
+
+import logic.learningpath.question.OpenQuestion;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
-
-import learningpath.question.OpenQuestion;
 
 import static org.junit.jupiter.api.Assertions.*;
 

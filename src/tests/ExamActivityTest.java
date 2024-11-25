@@ -7,10 +7,10 @@ import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import learningpath.activity.ExamActivity;
-import learningpath.question.MultipleOptionQuestion;
-import learningpath.question.OpenQuestion;
-import learningpath.question.Option;
+import logic.learningpath.activity.ExamActivity;
+import logic.learningpath.question.MultipleOptionQuestion;
+import logic.learningpath.question.OpenQuestion;
+import logic.learningpath.question.Option;
 
 public class ExamActivityTest {
     private ExamActivity examActivity;

@@ -2,7 +2,7 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 
-import utils.Generator;
+import logic.utils.Generator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;

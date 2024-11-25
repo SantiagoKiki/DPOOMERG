@@ -3,7 +3,7 @@ package tests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import learningpath.activity.ResourceActivity;
+import logic.learningpath.activity.ResourceActivity;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;

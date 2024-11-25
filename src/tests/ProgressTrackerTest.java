@@ -9,12 +9,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import learningpath.LearningPath;
-import learningpath.activity.Activity;
-import learningpath.activity.QuizActivity;
-import tracker.ActivityTracker;
-import tracker.ProgressTracker;
-import utils.Generator;
+import logic.learningpath.LearningPath;
+import logic.learningpath.activity.Activity;
+import logic.learningpath.activity.QuizActivity;
+import logic.tracker.ActivityTracker;
+import logic.tracker.ProgressTracker;
+import logic.utils.Generator;
 
 
 public class ProgressTrackerTest {

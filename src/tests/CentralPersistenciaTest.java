@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
 
 import controller.ProfessorController;
 import controller.StudentController;
-import learningpath.LearningPath;
-import learningpath.activity.Activity;
-import learningpath.activity.TaskActivity;
-import persistencia.CentralPersistencia;
-import users.Professor;
-import users.Student;
-import users.User;
+import logic.learningpath.LearningPath;
+import logic.learningpath.activity.Activity;
+import logic.learningpath.activity.TaskActivity;
+import logic.persistencia.CentralPersistencia;
+import logic.users.Professor;
+import logic.users.Student;
+import logic.users.User;
 
 public class CentralPersistenciaTest {
 	 private CentralPersistencia centralPersistencia;

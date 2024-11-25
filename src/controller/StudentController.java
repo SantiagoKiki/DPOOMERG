@@ -1,26 +1,25 @@
 package controller;
 
-import learningpath.*;
-import learningpath.activity.*;
-import persistencia.CentralPersistencia;
-import tracker.ActivityTracker;
-import tracker.ProgressTracker;
-import users.*;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
+import logic.learningpath.LearningPath;
+import logic.learningpath.activity.Activity;
+import logic.persistencia.CentralPersistencia;
+import logic.tracker.ActivityTracker;
+import logic.tracker.ProgressTracker;
+import logic.users.Student;
+import logic.users.User;
 
-public class StudentController extends Controller implements Serializable{
+public class StudentController extends Controller implements Serializable {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	public static ArrayList<Student> arrayStudents = new ArrayList<Student>();
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    public static ArrayList<Student> arrayStudents = new ArrayList<>();
     private LearningPath currentLearningPath;
     private ProgressTracker currentProgressTracker;
     private ActivityTracker currentActivityTracker;
@@ -34,14 +33,14 @@ public class StudentController extends Controller implements Serializable{
 
     }
 
-	public LinkedList<LearningPath> getLearningPathsByInterest(String interest) {
+    public LinkedList<LearningPath> getLearningPathsByInterest(String interest) {
 
         LinkedList<LearningPath> learningPaths = new LinkedList<>();
 
-        for(LearningPath learningPath : learningPathHashMap.values()) {
+        for (LearningPath learningPath : learningPathHashMap.values()) {
 
             LinkedList<String> tags = learningPath.getTags();
-            if(tags.contains(interest)) {
+            if (tags.contains(interest)) {
                 learningPaths.add(learningPath);
             }
         }
@@ -64,7 +63,6 @@ public class StudentController extends Controller implements Serializable{
     }
 
     // Enrolling management method
-
     /**
      * Enrolls a student in a learning path.
      */
@@ -72,9 +70,7 @@ public class StudentController extends Controller implements Serializable{
         student.enrollInLearningPath(currentLearningPath);
     }
 
-
     // Progress tracker management methods
-
     /**
      * Retrieves the progress trackers associated with a student.
      *
@@ -85,7 +81,8 @@ public class StudentController extends Controller implements Serializable{
     }
 
     /**
-     * Retrieves a progress tracker by its index from a student's progress trackers.
+     * Retrieves a progress tracker by its index from a student's progress
+     * trackers.
      *
      * @return A linked list of progress trackers associated with the student.
      */
@@ -97,14 +94,16 @@ public class StudentController extends Controller implements Serializable{
     /**
      * Retrieves the activity trackers associated with a progress tracker.
      *
-     * @return A linked list of activity trackers associated with the progress tracker.
+     * @return A linked list of activity trackers associated with the progress
+     * tracker.
      */
     public LinkedList<ActivityTracker> getActivityTrackers() {
         return currentProgressTracker.getActivityTrackers();
     }
 
     /**
-     * Retrieves an activity tracker by its index from a progress tracker's activity trackers.
+     * Retrieves an activity tracker by its index from a progress tracker's
+     * activity trackers.
      *
      * @param index The index of the activity tracker.
      * @return The activity tracker at the specified index.
@@ -114,7 +113,6 @@ public class StudentController extends Controller implements Serializable{
     }
 
     // Activity tracker management methods
-
     /**
      * Retrieves the activity associated with an activity tracker.
      *
@@ -144,65 +142,61 @@ public class StudentController extends Controller implements Serializable{
         currentProgressTracker.recordActivityCompletion(currentActivityTracker);
     }
 
-	public Student getStudent() {
-		return student;
-	}
+    public Student getStudent() {
+        return student;
+    }
 
-	public void setStudent(Student student) {
-		this.student = student;
-	}
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
-	public LearningPath getCurrentLearningPath() {
-		return currentLearningPath;
-	}
+    public LearningPath getCurrentLearningPath() {
+        return currentLearningPath;
+    }
 
-	public void setCurrentLearningPath(LearningPath currentLearningPath) {
-		this.currentLearningPath = currentLearningPath;
-	}
+    public void setCurrentLearningPath(LearningPath currentLearningPath) {
+        this.currentLearningPath = currentLearningPath;
+    }
 
-	public ProgressTracker getCurrentProgressTracker() {
-		return currentProgressTracker;
-	}
+    public ProgressTracker getCurrentProgressTracker() {
+        return currentProgressTracker;
+    }
 
-	public void setCurrentProgressTracker(ProgressTracker currentProgressTracker) {
-		this.currentProgressTracker = currentProgressTracker;
-	}
+    public void setCurrentProgressTracker(ProgressTracker currentProgressTracker) {
+        this.currentProgressTracker = currentProgressTracker;
+    }
 
-	public ActivityTracker getCurrentActivityTracker() {
-		return currentActivityTracker;
-	}
+    public ActivityTracker getCurrentActivityTracker() {
+        return currentActivityTracker;
+    }
 
-	public void setCurrentActivityTracker(ActivityTracker currentActivityTracker) {
-		this.currentActivityTracker = currentActivityTracker;
-	}
+    public void setCurrentActivityTracker(ActivityTracker currentActivityTracker) {
+        this.currentActivityTracker = currentActivityTracker;
+    }
 
-	public LinkedList<LearningPath> getLearningPathsByInterest() {
-		return learningPathsByInterest;
-	}
+    public LinkedList<LearningPath> getLearningPathsByInterest() {
+        return learningPathsByInterest;
+    }
 
-	public void setLearningPathsByInterest(LinkedList<LearningPath> learningPathsByInterest) {
-		this.learningPathsByInterest = learningPathsByInterest;
-	}
+    public void setLearningPathsByInterest(LinkedList<LearningPath> learningPathsByInterest) {
+        this.learningPathsByInterest = learningPathsByInterest;
+    }
 
-	public void setCentralPersistencia(CentralPersistencia centralPersistencia) {
-		this.centralPersistencia = centralPersistencia;
-	}
-	public CentralPersistencia getCentralPersistencia() {
-		return centralPersistencia;
-	}
+    public void setCentralPersistencia(CentralPersistencia centralPersistencia) {
+        this.centralPersistencia = centralPersistencia;
+    }
 
-	public boolean isStudentRegistered(String login) {
-		for(Student elements : arrayStudents)
-		{
-			if (elements.equals(login)){
-				return true;
-			}
-		}
-		return false;
-	}
-    
-    
-    
+    public CentralPersistencia getCentralPersistencia() {
+        return centralPersistencia;
+    }
+
+    public boolean isStudentRegistered(String login) {
+        for (Student elements : arrayStudents) {
+            if (elements.getUsername().equals(login)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
-
-

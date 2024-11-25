@@ -1,13 +1,14 @@
 package consola;
 
 import controller.ProfessorController;
-import learningpath.LearningPath;
-import learningpath.activity.Activity;
-import learningpath.question.MultipleOptionQuestion;
-import learningpath.question.OpenQuestion;
-
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Scanner;
+import logic.learningpath.LearningPath;
+import logic.learningpath.activity.Activity;
+import logic.learningpath.question.MultipleOptionQuestion;
+import logic.learningpath.question.OpenQuestion;
+import logic.persistencia.CentralPersistencia;
 
 public class ProfessorConsola implements Serializable {
 

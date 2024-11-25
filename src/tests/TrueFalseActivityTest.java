@@ -6,9 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import learningpath.activity.TrueFalseActivity;
-import learningpath.question.Option;
-import learningpath.question.TrueFalseQuestion;
+import logic.learningpath.activity.TrueFalseActivity;
+import logic.learningpath.question.Option;
+import logic.learningpath.question.TrueFalseQuestion;
 
 public class TrueFalseActivityTest {
 	

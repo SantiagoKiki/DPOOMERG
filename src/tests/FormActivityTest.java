@@ -7,8 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import learningpath.activity.FormActivity;
-import learningpath.question.OpenQuestion;
+import logic.learningpath.activity.FormActivity;
+import logic.learningpath.question.OpenQuestion;
 
 public class FormActivityTest {
 	

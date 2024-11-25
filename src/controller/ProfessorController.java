@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
-import learningpath.LearningPath;
-import learningpath.activity.*;
-import learningpath.question.*;
-import users.Professor;
-import users.User;
+
+import logic.learningpath.LearningPath;
+import logic.learningpath.activity.Activity;
+import logic.learningpath.question.MultipleOptionQuestion;
+import logic.learningpath.question.OpenQuestion;
+import logic.users.Professor;
+import logic.users.User;
 
 public class ProfessorController extends Controller {
 
-	public Professor professor;
+    public Professor professor;
     private LearningPath currentLearningPath;
     private Activity currentActivity;
-    public static ArrayList<Professor> arrayProfes = new ArrayList<Professor>();
+    public static ArrayList<Professor> arrayProfes = new ArrayList<>();
 
     /**
      * Constructs a new ProfessorController with the specified hash maps and
@@ -176,8 +178,6 @@ public class ProfessorController extends Controller {
         Activity newActivity = professor.createTaskActivity(title, description, objective, expectedDuration, mandatory, toDo);
         activityHashMap.put(newActivity.getId(), newActivity);
     }
-    
-
 
     public void editCurrentActivityTitle(String title) {
         professor.editActivityTitle(currentActivity, title);
@@ -211,13 +211,12 @@ public class ProfessorController extends Controller {
         professor.removeFollowUpActivityFromActivityByIndex(currentActivity, index);
     }
 
-	public Professor getProfessor() {
-		return professor;
-	}
+    public Professor getProfessor() {
+        return professor;
+    }
 
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
-	}
-
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
 
 }
