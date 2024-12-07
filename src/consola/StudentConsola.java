@@ -6,7 +6,9 @@ import java.util.Scanner;
 import controller.StudentController;
 import learningpath.LearningPath;
 import learningpath.activity.Activity;
+import learningpath.activity.ExamActivity;
 import learningpath.activity.ResourceActivity;
+import learningpath.question.MultipleOptionQuestion;
 import learningpath.question.OpenQuestion;
 import persistencia.CentralPersistencia;
 import tracker.ProgressTracker;
@@ -17,6 +19,9 @@ import users.Student;
 
 public class StudentConsola implements Serializable {
 
+	/**
+	 * 
+	 */
 	private final StudentController studentController;
 	protected Scanner scanner;
 	private static Student studentOwn;
@@ -26,11 +31,15 @@ public class StudentConsola implements Serializable {
 	public String tag1 = "TAG";
 	public String tag2 = "Tag2";
 	public Professor ivan = new Professor( "1234", "contraseña");
+	 LinkedList<MultipleOptionQuestion> MOQuestions = null;
 	public LinkedList<OpenQuestion> questions = null;
+	public ExamActivity examenFinal= new ExamActivity("aaa",  "Miedo",  "Medir los conocimientos", 60,  true,	 questions, MOQuestions); 
 	public ResourceActivity actividad1 = new ResourceActivity("Titulo Ingenioso", "En esta actividad tienes que...", "El objetivo es....", 20, true, "");
 	public LearningPath learningPathPrueba = new LearningPath("Sistemas", "Ingeniería en sistemas",  arrayIntereses, 4,  arrayEtiquetas,ivan);
 	public CentralPersistencia persistir = new CentralPersistencia();
 
+
+	
 	public StudentConsola(StudentController studentController) {
 		super();
 		this.studentController = studentController;
@@ -40,6 +49,7 @@ public class StudentConsola implements Serializable {
 
 
 	public void start() {
+		persistir.cargarStudent(); //Cargar la persistencia :b
 		arrayIntereses.add(interes);
 		arrayEtiquetas.add(tag1);
 		arrayEtiquetas.add(tag2);
@@ -53,11 +63,12 @@ public class StudentConsola implements Serializable {
         System.out.println("5. Calificar una actividad \n");
         System.out.println("6. Consultar progreso en un Learning Path \n");
         System.out.println("0. Cerrar sesión \n");
-		persistir.cargar();
-
+		this.learningPathPrueba.addActivity(actividad1);
+		this.learningPathPrueba.addActivity(examenFinal);
 		while (true) {
 			String opcion = getInput("\nSelecciona una opción: ").trim();
 			switch (opcion) {
+				
 				case "1":
 					System.out.println("Los siguientes learning Paths estan disponibles: \n");
 					System.out.println("Si esta interesad@ en alguno de ellos guarde el id ya que a través de el se podra ingresar: \n");
@@ -69,13 +80,15 @@ public class StudentConsola implements Serializable {
 						System.out.println("===========================================\\n");
 
 					}
+					start();
+					
 					break;
 				case "2":
 					System.out.println("Por favor ingrese la id del LearningPath a inscribir: \n");
 					String numero = getInput("\nIngrese la id: ").trim();
 					LearningPath learningPath = studentOwn.mapaLearningPaths.get(numero);
 					studentController.setCurrentLearningPath(learningPath);
-
+					start();
 					break;
 
 				case "3":
@@ -94,6 +107,7 @@ public class StudentConsola implements Serializable {
 
 						}
 					}
+					start();
 					break;
 				case "4":
 					System.out.println("\n Generar Reseña para un Learning Path");
@@ -106,15 +120,31 @@ public class StudentConsola implements Serializable {
 						System.out.println("ID: " + id + ", Título: " + lp.getTitle());
 					}
 					String idLearningPathResena = getInput("Ingrese el ID del Learning Path para el que desea generar una reseña: ").trim();
+					try {
 					LearningPath selectedPath = studentOwn.mapaLearningPaths.get(idLearningPathResena);
-					if (selectedPath == null) {
-						System.out.println("El ID ingresado no corresponde a un Learning Path inscrito.");
-						break;
+		
+					if (selectedPath != null) {
+						LinkedList<String> reseñaEdit = selectedPath.getReseñas();
+						System.out.println("\n Escriba su reseña: ");
+						String nuevaReseña = getInput("\nIngrese la id: ").trim();
+						reseñaEdit.add(nuevaReseña);
 					}
-					break;
+					else {
+						System.out.println("El ID ingresado no corresponde a un Learning Path inscrito.");
+					    start();
+						break;
+					}	
+					}
+					catch (Exception e)
+					{System.out.println("No se encontro el learning path");
+				    start();
+				    }
+				case "5":
+					
 				case "6":
 					if (studentOwn.mapaLearningPaths.isEmpty()) {
 						System.out.println("No tienes Learning Paths inscritos.");
+						start();
 						break;
 					}
 					for (String id : studentOwn.mapaLearningPaths.keySet()) {
@@ -125,13 +155,16 @@ public class StudentConsola implements Serializable {
 					LearningPath selectedPathProgreso = studentOwn.mapaLearningPaths.get(idLearningPathProgreso);
 					if (selectedPathProgreso == null) {
 						System.out.println("El ID ingresado no corresponde a un Learning Path inscrito.");
+						start();
 						break;
 					}
 					ProgressTracker tracker = studentOwn.getProgressTrackerByLearningPath(selectedPathProgreso);
 					System.out.println("Progreso actual: " + tracker.getProgress() + "%");
+					start();
 					break;
 				default:
 					System.out.println("Opcion invalida. Pruebe de nuevo.");
+					start();
 					return;
 			}
 		}

@@ -3,15 +3,22 @@ package consola;
 import controller.Controller;
 import controller.ProfessorController;
 import controller.StudentController;
+
+import java.io.Serializable;
 import java.util.Scanner;
 
 
 /**
  * The main class for the console application.
  */
-public class ConsolaMain {
+public class ConsolaMain implements Serializable {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * The main method that runs the console application.
      *
      * @param args Command line arguments
