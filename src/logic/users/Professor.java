@@ -9,8 +9,10 @@ import logic.learningpath.activity.FormActivity;
 import logic.learningpath.activity.QuizActivity;
 import logic.learningpath.activity.ResourceActivity;
 import logic.learningpath.activity.TaskActivity;
+import logic.learningpath.activity.TrueFalseActivity;
 import logic.learningpath.question.MultipleOptionQuestion;
 import logic.learningpath.question.OpenQuestion;
+import logic.learningpath.question.TrueFalseQuestion;
 import logic.persistencia.CentralPersistencia;
 
 public class Professor extends User {
@@ -201,6 +203,14 @@ public class Professor extends User {
         createdActivities.add(activity);
         return activity;
     }
+    
+	public Activity createTrueFalseActivity(String title, String description, String objective, int expectedDuration,
+			boolean mandatory, LinkedList<TrueFalseQuestion> question) {
+
+		Activity activity = new TrueFalseActivity(title, description, objective, expectedDuration, mandatory, question);
+		createdActivities.add(activity);
+		return activity;
+	}
 
     public void editActivityTitle(Activity activity, String title) {
         activity.setTitle(title);

@@ -9,6 +9,7 @@ import logic.learningpath.LearningPath;
 import logic.learningpath.activity.Activity;
 import logic.learningpath.question.MultipleOptionQuestion;
 import logic.learningpath.question.OpenQuestion;
+import logic.learningpath.question.TrueFalseQuestion;
 import logic.users.Professor;
 import logic.users.User;
 
@@ -178,7 +179,14 @@ public class ProfessorController extends Controller {
         Activity newActivity = professor.createTaskActivity(title, description, objective, expectedDuration, mandatory, toDo);
         activityHashMap.put(newActivity.getId(), newActivity);
     }
-
+    
+	public void createTrueFalseActivity(String title, String description, String objective, int expectedDuration,
+			boolean mandatory, LinkedList<TrueFalseQuestion> questions) {
+		Activity newActivity = professor.createTrueFalseActivity(title, description, objective, expectedDuration,
+				mandatory, questions);
+		activityHashMap.put(newActivity.getId(), newActivity);
+	}
+    
     public void editCurrentActivityTitle(String title) {
         professor.editActivityTitle(currentActivity, title);
     }

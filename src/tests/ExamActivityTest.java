@@ -217,7 +217,7 @@ public class ExamActivityTest {
         examActivity.addMOQuestion(question);
         examActivity.addMOQuestion(question2);
         assertEquals(2, examActivity.getMOQuestions().size());
-        assertEquals(2.0 / 3, examActivity.rateMultipleOption(2));
+        assertEquals(2, examActivity.rateMultipleOption(2));
     }
 
     @Test

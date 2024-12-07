@@ -4,11 +4,10 @@ import java.util.concurrent.TimeUnit;
 
 public class TaskActivity extends Activity {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String toDo;
+	private boolean done = false;
+	public String TYPE = "task";
 
 	public TaskActivity(String title, String description, String objective, int expectedDuration, boolean mandatory,
 			String toDo) {
@@ -23,7 +22,15 @@ public class TaskActivity extends Activity {
 	public void setToDo(String toDo) {
 		this.toDo = toDo;
 	}
-	
+
+	public boolean isDone() {
+		return done;
+	}
+
+	public void setDone(boolean done) {
+		this.done = done;
+	}
+
 	public void doActivity() {
 		System.out.println("Task Activity: " + this.title);
 		System.out.println("Description: " + this.description);
@@ -33,6 +40,7 @@ public class TaskActivity extends Activity {
 		try {
 			System.out.println("Doing task...");
 			TimeUnit.SECONDS.sleep(5);
+			this.done = true;
 			System.out.println("Task done.");
 		} catch (InterruptedException e) {
 			System.out.println("Error doing task.");

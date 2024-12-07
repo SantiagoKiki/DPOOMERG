@@ -2,7 +2,7 @@ package logic.learningpath.question;
 
 import java.io.Serializable;
 
-public class OpenQuestion implements Serializable{
+public class OpenQuestion implements Serializable {
 
 	/**
 	 * 

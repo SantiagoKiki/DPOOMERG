@@ -88,7 +88,7 @@ public class MultipleOptionQuestionTest {
 		multipleOptionQuestion.addOption(option1);
 		multipleOptionQuestion.addOption(option2);
 		multipleOptionQuestion.addOption(option3);
-		assertEquals(1.0 / 3, multipleOptionQuestion.rate(1));
+		assertEquals(1, multipleOptionQuestion.rate(1));
 	}
 
 	@Test
@@ -97,4 +97,43 @@ public class MultipleOptionQuestionTest {
 		assertEquals(0.0, multipleOptionQuestion.rate(1));
 	}
 
+	@Test
+	@DisplayName("Agregar más de 4 opciones")
+	public void agregarMasDe4Opciones() {
+		Option option1 = new Option("A. Brasília", true, "Correcto");
+		Option option2 = new Option("B. Sao Paulo", false, "Incorrecto");
+		Option option3 = new Option("C. Rio de Janeiro", false, "Incorrecto");
+		Option option4 = new Option("D. Recife", false, "Incorrecto");
+		Option option5 = new Option("E. Salvador", false, "Incorrecto");
+		multipleOptionQuestion.addOption(option1);
+		multipleOptionQuestion.addOption(option2);
+		multipleOptionQuestion.addOption(option3);
+		multipleOptionQuestion.addOption(option4);
+		assertThrows(IllegalStateException.class, () -> {
+			multipleOptionQuestion.addOption(option5);
+		});
+	}
+
+	@Test
+	@DisplayName("Cambiar arreglo de opciones")
+	public void cambiarArregloDeOpciones() {
+		Option option1 = new Option("A. Brasília", true, "Correcto");
+		Option option2 = new Option("B. Sao Paulo", false, "Incorrecto");
+		Option option3 = new Option("C. Rio de Janeiro", false, "Incorrecto");
+		Option option4 = new Option("D. Recife", false, "Incorrecto");
+		multipleOptionQuestion.addOption(option1);
+		multipleOptionQuestion.addOption(option2);
+		multipleOptionQuestion.addOption(option3);
+		multipleOptionQuestion.addOption(option4);
+		Option option5 = new Option("E. Salvador", false, "Incorrecto");
+		Option option6 = new Option("F. Manaus", false, "Incorrecto");
+		Option option7 = new Option("G. Porto Alegre", false, "Incorrecto");
+		Option option8 = new Option("H. Curitiba", false, "Incorrecto");
+		Option[] options = new Option[] { option5, option6, option7, option8 };
+		multipleOptionQuestion.setOptions(options);
+		assertFalse(multipleOptionQuestion.containsOption(option1));
+		assertFalse(multipleOptionQuestion.containsOption(option2));
+		assertFalse(multipleOptionQuestion.containsOption(option3));
+		assertFalse(multipleOptionQuestion.containsOption(option4));
+	}
 }

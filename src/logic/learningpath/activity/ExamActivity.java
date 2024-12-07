@@ -14,6 +14,7 @@ public class ExamActivity extends Activity {
 	private static final long serialVersionUID = 1L;
 	private LinkedList<OpenQuestion> openQuestions;
 	private LinkedList<MultipleOptionQuestion> MOQuestions;
+	public static String TYPE = "exam";
 
 	public ExamActivity(String title, String description, String objective, int expectedDuration, boolean mandatory,
 			LinkedList<OpenQuestion> openQuestions, LinkedList<MultipleOptionQuestion> MOQuestions) {

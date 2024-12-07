@@ -12,7 +12,11 @@ import logic.persistencia.CentralPersistencia;
 
 public class ProfessorConsola implements Serializable {
 
-    private final ProfessorController professorController;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final ProfessorController professorController;
     private final Scanner scanner;
     public CentralPersistencia persistir;
 

@@ -12,6 +12,7 @@ public class FormActivity extends Activity {
 	 */
 	private static final long serialVersionUID = 1L;
 	private LinkedList<OpenQuestion> questions;
+	public String TYPE = "form";
 
 	public FormActivity(String title, String description, String objective, int expectedDuration, boolean mandatory,
 			LinkedList<OpenQuestion> questions) {
@@ -27,14 +28,14 @@ public class FormActivity extends Activity {
 		this.questions = questions;
 	}
 
-	public void addQuestion(OpenQuestion question) throws NullPointerException, IllegalArgumentException{
+	public void addQuestion(OpenQuestion question) throws NullPointerException, IllegalArgumentException {
 		if (question == null) {
 			throw new NullPointerException("Question can not be null.");
 		}
 		if (this.containsQuestion(question)) {
 			throw new IllegalArgumentException("Question already added.");
 		}
-		
+
 		this.questions.add(question);
 	}
 
@@ -51,7 +52,7 @@ public class FormActivity extends Activity {
 	public boolean containsQuestion(OpenQuestion question) {
 		return this.questions.contains(question);
 	}
-	
+
 	public void doActivity() {
 		try (Scanner scanner = new Scanner(System.in)) {
 			System.out.println("Form Activity: " + this.title);
