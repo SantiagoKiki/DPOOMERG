@@ -65,6 +65,7 @@ public class LearningPathInscribirGUI {
 
             if (selectedPath != null) {
                 studentController.setCurrentLearningPath(selectedPath);
+                studentController.getStudent().setLearningPathStudent(selectedPath);
 
                 if (true) {
                     resultLabel.setText("Te has inscrito correctamente a: " + selectedPath.getTitle());

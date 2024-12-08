@@ -330,8 +330,8 @@ public class LearningPath implements Serializable {
 		return reseñas;
 	}
 
-	public void setReseñas(LinkedList<String> reseñas) {
-		this.reseñas = reseñas;
+	public void setReseñas(String rese) {
+		this.reseñas.add(rese);
 	}
 	
 	

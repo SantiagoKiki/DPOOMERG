@@ -60,15 +60,11 @@ public class LearningPathGUI {
 
         JScrollPane scrollPane = new JScrollPane(learningPathPanel);
         frame.add(scrollPane, BorderLayout.CENTER);
-
-        // Botón de cerrar
         JButton closeButton = new JButton("Cerrar");
         closeButton.setBackground(Color.PINK);
         closeButton.setForeground(Color.WHITE);
         closeButton.addActionListener(e -> frame.dispose());
         frame.add(closeButton, BorderLayout.SOUTH);
-
-        // Mostrar ventana
         frame.setVisible(true);
     }
 }

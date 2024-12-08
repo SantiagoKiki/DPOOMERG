@@ -102,6 +102,15 @@ public class Student extends User implements Serializable {
     public void setViewStudent(StudentConsola viewStudent) {
 		this.viewStudent = viewStudent;
 	}
+
+	public LearningPath getLearningPathStudent() {
+		return learningPathStudent;
+	}
+
+	public void setLearningPathStudent(LearningPath learningPathStudent) {
+		this.learningPathStudent = learningPathStudent;
+	}
+    
     
     
 }

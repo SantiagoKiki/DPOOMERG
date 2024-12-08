@@ -11,6 +11,7 @@ import learningpath.activity.ResourceActivity;
 import learningpath.question.MultipleOptionQuestion;
 import learningpath.question.OpenQuestion;
 import persistencia.CentralPersistencia;
+import tracker.ActivityTracker;
 import tracker.ProgressTracker;
 import users.Professor;
 import users.Student;
@@ -140,31 +141,68 @@ public class StudentConsola implements Serializable {
 				    start();
 				    }
 				case "5":
-					
-				case "6":
-					if (studentOwn.mapaLearningPaths.isEmpty()) {
-						System.out.println("No tienes Learning Paths inscritos.");
-						start();
-						break;
-					}
-					for (String id : studentOwn.mapaLearningPaths.keySet()) {
-						LearningPath lp = studentOwn.mapaLearningPaths.get(id);
-						System.out.println("ID: " + id + ", Título: " + lp.getTitle());
-					}
-					String idLearningPathProgreso = getInput("Ingrese el ID del Learning Path que desea consultar: ").trim();
-					LearningPath selectedPathProgreso = studentOwn.mapaLearningPaths.get(idLearningPathProgreso);
-					if (selectedPathProgreso == null) {
-						System.out.println("El ID ingresado no corresponde a un Learning Path inscrito.");
-						start();
-						break;
-					}
-					ProgressTracker tracker = studentOwn.getProgressTrackerByLearningPath(selectedPathProgreso);
-					System.out.println("Progreso actual: " + tracker.getProgress() + "%");
-					start();
-					break;
+	                System.out.println("\nCalificar una Actividad");
+	                if (studentOwn.getProgressTrackers().isEmpty()) {
+	                    System.out.println("No tienes actividades disponibles para calificar. Asegúrate de estar inscrito en un Learning Path.");
+	                    break;
+	                }
+	                System.out.println("Tu Learning Path inscrito:");
+	                for (int i = 0; i < studentOwn.getProgressTrackers().size(); i++) {
+	                    System.out.println((i + 1) + ". " + studentOwn.getProgressTrackers().get(i).getLearningpath().getTitle());
+	                }
+	                int trackerIndex = Integer.parseInt(getInput("\nSelecciona el número del Learning Path que deseas consultar: ").trim()) - 1;
+	                if (trackerIndex < 0 || trackerIndex >= studentOwn.getProgressTrackers().size()) {
+	                    System.out.println("Índice inválido.");
+	                    break;
+	                }
+	                ProgressTracker progressTracker = studentOwn.getProgressTrackers().get(trackerIndex);
+	                LinkedList<ActivityTracker> activityTrackers = progressTracker.getActivityTrackers();
+	                if (activityTrackers.isEmpty()) {
+	                    System.out.println("No hay actividades disponibles para calificar en este Learning Path.");
+	                    break;
+	                }
+	                System.out.println("\nActividades disponibles:");
+	                for (int i = 0; i < activityTrackers.size(); i++) {
+	                    System.out.println((i + 1) + ". " + activityTrackers.get(i).getActivity().getTitle());
+	                }
+	                int activityIndex = Integer.parseInt(getInput("\nSelecciona el número de la actividad que deseas calificar: ").trim()) - 1;
+	                if (activityIndex < 0 || activityIndex >= activityTrackers.size()) {
+	                    System.out.println("Índice inválido.");
+	                    break;
+	                }
+	                ActivityTracker tracker = activityTrackers.get(activityIndex);
+	                int rating = Integer.parseInt(getInput("Ingresa una calificación entre 1 y 5: ").trim());
+	                if (rating < 1 || rating > 5) {
+	                    System.out.println("La calificación debe estar entre 1 y 5.");
+	                    break;
+	                }
+	                tracker.addRating(rating);
+	                System.out.println("Has calificado la actividad " + tracker.getActivity().getTitle() + " con un " + rating);
+	                break;
+	            case "6":
+	                if (studentOwn.mapaLearningPaths.isEmpty()) {
+	                    System.out.println("No tienes Learning Paths inscritos.");
+	                    break;
+	                }
+	                for (String id : studentOwn.mapaLearningPaths.keySet()) {
+	                    LearningPath lp = studentOwn.mapaLearningPaths.get(id);
+	                    System.out.println("ID: " + id + ", Título: " + lp.getTitle());
+	                }
+	                String idLearningPathProgreso = getInput("Ingrese el ID del Learning Path que desea consultar: ").trim();
+	                LearningPath selectedPathProgreso = studentOwn.mapaLearningPaths.get(idLearningPathProgreso);
+	                if (selectedPathProgreso == null) {
+	                    System.out.println("El ID ingresado no corresponde a un Learning Path inscrito.");
+	                    break;
+	                }
+	                ProgressTracker tracker2 = studentOwn.getProgressTrackerByLearningPath(selectedPathProgreso);
+	                if (tracker2 == null) {
+	                    System.out.println("No se encontró un progreso asociado a este Learning Path.");
+	                    break;
+	                }
+	                System.out.println("Progreso actual del Learning Path '" + selectedPathProgreso.getTitle() + "': " + tracker2.getProgress() + "%");
+	                break;
 				default:
 					System.out.println("Opcion invalida. Pruebe de nuevo.");
-					start();
 					return;
 			}
 		}

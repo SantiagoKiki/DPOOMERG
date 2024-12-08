@@ -52,19 +52,15 @@ public class StudentGUI {
         frame.setLayout(new BorderLayout());
 		this.learningPathPrueba.addActivity(actividad1);
 		this.learningPathPrueba.addActivity(examenFinal);
-        // Panel principal
         JPanel panelSup = new JPanel();
         panelSup.setLayout(new BorderLayout());
-        panelSup.setBackground(Color.PINK);
-        
-
+        panelSup.setBackground(Color.PINK);  
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(6,1) );
+        mainPanel.setLayout(new GridLayout(7,1) );
         JLabel welcomeLabel = new JLabel("Bienvenido estudiante");
         welcomeLabel.setForeground(Color.white);
         welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelSup.add(welcomeLabel, BorderLayout.NORTH);
-
         JButton btnVerLearningPaths = new JButton("Ver los learningPaths");
         JButton btnInscribirLearningPath = new JButton("Inscribir learningpaths");
         JButton btnVerActividades = new JButton("Ver actividades learningPath");
@@ -77,23 +73,19 @@ public class StudentGUI {
         btnGenerarResena.setBackground(new Color(245, 245, 220));
         btnCalificarActividad.setBackground(new Color(245, 245, 220));
         btnConsultarProgreso.setBackground(new Color(245, 245, 220));
-
-        // Add buttons and actions
-        mainPanel.add(btnVerLearningPaths);
+               mainPanel.add(btnVerLearningPaths);
         mainPanel.add(btnInscribirLearningPath);
         mainPanel.add(btnVerActividades);
         mainPanel.add(btnGenerarResena);
         mainPanel.add(btnCalificarActividad);
         mainPanel.add(btnConsultarProgreso);
-
-        // Link buttons to methods
         btnVerLearningPaths.addActionListener(e -> mostrarLearningPaths(studentController));
         btnInscribirLearningPath.addActionListener(e -> inscribirLearningPath(studentController));
         btnVerActividades.addActionListener(e -> verActividadesLearningPath(studentController));
-        btnGenerarResena.addActionListener(e -> generarResena());
-        btnConsultarProgreso.addActionListener(e -> consultarProgreso());
+        btnGenerarResena.addActionListener(e -> generarResena(studentController));
+        btnCalificarActividad.addActionListener(e -> calificarActividad(studentController));
+        btnConsultarProgreso.addActionListener(e -> consultarProgreso(studentController));
 
-        // Añadimos el panel al manejador
         panelManager.addPanel("main", mainPanel);
         frame.add(panelSup, BorderLayout.NORTH);
         frame.add(mainPanel, BorderLayout.CENTER);
@@ -112,15 +104,21 @@ public class StudentGUI {
     }
 
     private void verActividadesLearningPath(StudentController studentCont) {
-        JOptionPane.showMessageDialog(null, "Implementar lógica de ver actividades de Learning Path");
+        JOptionPane.showMessageDialog(null, "Estas son las actividades de los learning Paths");
         new ViewActivitiesGUI(studentCont);
     }
 
-    private void generarResena() {
-        JOptionPane.showMessageDialog(null, "Implementar lógica de generar reseña");
+    private void generarResena(StudentController studentCont) {
+        JOptionPane.showMessageDialog(null, "Sea lo mas respetuoso posible recuerde que esto puede tener efecto en su historia académica");
+        new AgregarReviewGUI(studentCont);
     }
 
-    private void consultarProgreso() {
+    private void calificarActividad(StudentController studentCont) {
+        JOptionPane.showMessageDialog(null, "A continuación califique las actividades: ");
+        new CalificarActividadGUI(studentCont);
+    }
+    private void consultarProgreso(StudentController studentCont) {
         JOptionPane.showMessageDialog(null, "Implementar lógica de consultar progreso");
+        new ConsultarProgresoGUI(studentCont);
     }
 }
