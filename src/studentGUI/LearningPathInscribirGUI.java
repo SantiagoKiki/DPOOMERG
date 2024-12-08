@@ -3,12 +3,15 @@ package studentGUI;
 
 import controller.StudentController;
 import learningpath.LearningPath;
+import learningpath.activity.Activity;
+import tracker.ProgressTracker;
 import users.Student;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 public class LearningPathInscribirGUI {
     private JFrame frame;
@@ -66,7 +69,14 @@ public class LearningPathInscribirGUI {
             if (selectedPath != null) {
                 studentController.setCurrentLearningPath(selectedPath);
                 studentController.getStudent().setLearningPathStudent(selectedPath);
-
+                for(Activity elemento : selectedPath.getActivities()) 
+                {        studentController.activityHashMap.put(elemento.getId(), elemento);
+}
+                ProgressTracker progreso = new ProgressTracker(studentController.getStudent().getUsername(), selectedPath);
+                studentController.setCurrentProgressTracker(progreso);
+                studentController.getCurrentProgressTracker().setLearningPath(selectedPath);
+                studentController.getStudent().getProgressTrackers().add(progreso);
+                
                 if (true) {
                     resultLabel.setText("Te has inscrito correctamente a: " + selectedPath.getTitle());
                     resultLabel.setForeground(new Color(0, 128, 0));
